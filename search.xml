@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Docker网络配置</title>
+    <url>/2020/11/15/Docker%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A/</url>
+    <content><![CDATA[<h2 id="1、Mac连通虚拟机中的Docker网络"><a href="#1、Mac连通虚拟机中的Docker网络" class="headerlink" title="1、Mac连通虚拟机中的Docker网络"></a>1、Mac连通虚拟机中的Docker网络</h2><p>假设有Mac、虚拟机、Docker中的IP地址如下：</p>
+<table>
+<thead>
+<tr>
+<th>机器</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mac IP地址:</td>
+<td>192.168.31.196</td>
+</tr>
+<tr>
+<td>虚拟机IP:</td>
+<td>192.168.31.221</td>
+</tr>
+<tr>
+<td>Docker网络IP地址</td>
+<td>172.19.0.3</td>
+</tr>
+</tbody></table>
+<p>当前 Mac 可以ping通 虚拟机，虚拟机可以ping同虚拟机中的Docker网络，但是Mac无法ping同虚拟机中的Docker</p>
+<p>那么可以通过添加路由表到Mac中：</p>
+<pre class="line-numbers language-none"><code class="language-none">sudo route -n add -net 172.19.0.0 -netmask 255.255.255.0 192.168.31.221<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
+<p>那么路由表信息如下：（查看路由表： <code>netstat -nr</code>）</p>
+<pre class="line-numbers language-none"><code class="language-none">Internet:
+Destination        Gateway            Flags        Refs      Use   Netif Expire
+172.19&#x2F;24          192.168.31.221     UGSc            0        3     en0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果需要删除路由表，执行如下命令：</p>
+<pre class="line-numbers language-none"><code class="language-none">sudo route delete 172.19&#x2F;24<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="2、Windows连接到虚拟机的docker网络"><a href="#2、Windows连接到虚拟机的docker网络" class="headerlink" title="2、Windows连接到虚拟机的docker网络"></a>2、Windows连接到虚拟机的docker网络</h2><p>假设有Windows、虚拟机、Docker中的IP地址如下：</p>
+<table>
+<thead>
+<tr>
+<th>机器</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WindowsIP地址:</td>
+<td>192.168.31.196</td>
+</tr>
+<tr>
+<td>虚拟机IP:</td>
+<td>192.168.31.221</td>
+</tr>
+<tr>
+<td>Docker网络IP地址</td>
+<td>172.19.0.3</td>
+</tr>
+</tbody></table>
+<p>在windows中添加路由地址：</p>
+<pre class="line-numbers language-none"><code class="language-none">ROUTE -p add 172.19.0.0 mask 255.255.255.0 192.168.31.221<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
+<p>删除路由：</p>
+<pre class="line-numbers language-none"><code class="language-none">route delete 172.19.0.0 mask 255.255.255.0 192.168.31.221<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>注意点：需要关闭虚拟机的防火墙</strong></p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringBoot多环境配置文件</title>
     <url>/2020/11/15/SpringBoot%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h2 id="1、SpringBoot多环境配置文件"><a href="#1、SpringBoot多环境配置文件" class="headerlink" title="1、SpringBoot多环境配置文件"></a>1、SpringBoot多环境配置文件</h2><p>日常开发工作中，开发和生产环境是隔离的，那么对应的各种配置数据也是不一样的，SpringBoot提供了不同环境的配置数据管理，比如当前目录结构下有两套配置文件，如图：</p>
