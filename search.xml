@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SpringBoot多环境配置文件</title>
+    <url>/2020/11/15/SpringBoot%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="1、SpringBoot多环境配置文件"><a href="#1、SpringBoot多环境配置文件" class="headerlink" title="1、SpringBoot多环境配置文件"></a>1、SpringBoot多环境配置文件</h2><p>日常开发工作中，开发和生产环境是隔离的，那么对应的各种配置数据也是不一样的，SpringBoot提供了不同环境的配置数据管理，比如当前目录结构下有两套配置文件，如图：</p>
+<p><img src="/images/SpringBoot-profile%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png"></p>
+<p>在开发环境我们可以使用 <code>application-dev.properties</code>，而部署到正式环境中时，可以指定 <code>application-prod.properties</code></p>
+<p>如何指定对应的配置文件？有以下几种方式</p>
+<h2 id="2、激活指定的profile"><a href="#2、激活指定的profile" class="headerlink" title="2、激活指定的profile"></a>2、激活指定的profile</h2><ul>
+<li><p>在配置文件<code>application.properties</code>中指定：<code>spring.profiles.active=dev</code></p>
+</li>
+<li><p>命令行：<code>java -jar springboot-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev;</code> 可以直接在测试的时候，配置传入命令行参数</p>
+</li>
+<li><p>虚拟机参数：<code>-Dspring.profiles.active=dev</code></p>
+</li>
+</ul>
+<h2 id="3、Maven构建指定profile"><a href="#3、Maven构建指定profile" class="headerlink" title="3、Maven构建指定profile"></a>3、Maven构建指定profile</h2><p>上述步骤2中激活指定的profile，但是最终的文件中都包含了所有properties文件，target目录结构如下：</p>
+<p><img src="/images/SpringBoot-profile%E7%BC%96%E8%AF%91%E5%90%8E.png"></p>
+<p>但是如果编译后的jar包不包含非当前环境需要的properties文件，可以通过maven的的方式来构建，详细步骤如下：</p>
+<p><strong>（1）application.properties改为如下代码：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">spring.profiles.active&#x3D;@build.profile.id@<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>（2）pom.xml增加如下代码：</strong></p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span><span class="token punctuation">></span></span>
+	...
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/resources<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>excludes</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclude</span><span class="token punctuation">></span></span>application-*.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclude</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>excludes</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/resources<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>application-$&#123;build.profile.id&#125;.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profiles</span><span class="token punctuation">></span></span>
+        <span class="token comment">&lt;!--开发环境--></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build.profile.id</span><span class="token punctuation">></span></span>dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build.profile.id</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
+        <span class="token comment">&lt;!--生产环境--></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>prod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build.profile.id</span><span class="token punctuation">></span></span>prod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build.profile.id</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profiles</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>（3）通过如下maven命令执行：</strong></p>
+<p>通过IDEA中执行如下操作：</p>
+<ul>
+<li><p>在idea的maven窗口的lifecycle，在clean上右键弹出如下界面</p>
+<p><img src="/images/SpringBoot-profile%E5%88%9B%E5%BB%BAMaven%E6%9E%84%E5%BB%BA%E5%91%BD%E4%BB%A4.png"></p>
+</li>
+<li><p>选择：<code>Create Run/Debug Configuration</code>，弹出如下界面，并在 Command Line 中输入：<code>clean install -DskipTests -P prod -f pom.xml</code></p>
+<p><img src="/images/SpringBoot-profile%E5%91%BD%E4%BB%A4%E8%BE%93%E5%85%A5.png"></p>
+</li>
+<li><p>确认后，在maven的窗口中新增配置：</p>
+<p><img src="/images/SpringBoot-profile%E6%9C%80%E7%BB%88%E9%85%8D%E7%BD%AE%E6%98%BE%E7%A4%BA.png"></p>
+</li>
+<li><p>然后双击执行该命令，执行命令之后打开target目录，可以看到只包含了 <code>application-prod.properties</code> 文件，多余的文件没有包含在里面；</p>
+<p><img src="/images/SpringBoot-profile%E7%BC%96%E8%AF%91%E5%90%8E-2.png"></p>
+</li>
+</ul>
+<p>上述操作比较麻烦，可以直接通过命令：<code>mvn clean install -DskipTests -P prod</code>，效果同上面</p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java-Unsafe分析</title>
     <url>/2020/11/01/Java-Unsafe/</url>
     <content><![CDATA[<h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><p>Unsafe是位于<code>sun.misc</code>包下的一个类，主要提供一些用于执行低级别、不安全操作的方法，如直接访问系统内存资源、自主管理内存资源等，这些方法在提升Java运行效率、增强Java语言底层资源操作能力方面起到了很大的作用。但由于Unsafe类使Java语言拥有了类似C语言指针一样操作内存空间的能力，这无疑也增加了程序发生相关指针问题的风险。在程序中过度、不正确使用Unsafe类会使得程序出错的概率变大，使得Java这种安全的语言变得不再“安全”，因此对Unsafe的使用一定要慎重；</p>
