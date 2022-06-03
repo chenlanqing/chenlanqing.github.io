@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Docker网络配置, 编程,大数据,生活">
+    <meta name="keywords" content="Gson自定义映射, 编程,大数据,生活">
     <meta name="description" content="本站主要是个人技术学习过程的资料记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Docker网络配置 | QingFan&#39;s Blog</title>
+    <title>Gson自定义映射 | QingFan&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -223,12 +223,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Docker网络配置</h1>
+                    <h1 class="description center-align post-title">Gson自定义映射</h1>
                 </div>
             </div>
         </div>
@@ -345,8 +345,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Docker/">
-                                <span class="chip bg-color">Docker</span>
+                            <a href="/tags/%E6%A1%86%E6%9E%B6/">
+                                <span class="chip bg-color">框架</span>
                             </a>
                         
                     </div>
@@ -357,8 +357,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Docker/" class="post-category">
-                                Docker
+                            <a href="/categories/Gson/" class="post-category">
+                                Gson
                             </a>
                         
                     </div>
@@ -370,7 +370,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-15
+                    2022-06-03
                 </div>
                 
 
@@ -379,14 +379,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    340
+                    1.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    8 分
                 </div>
                 
 
@@ -396,64 +396,248 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、Mac连通虚拟机中的Docker网络"><a href="#1、Mac连通虚拟机中的Docker网络" class="headerlink" title="1、Mac连通虚拟机中的Docker网络"></a>1、Mac连通虚拟机中的Docker网络</h2><p>假设有Mac、虚拟机、Docker中的IP地址如下：</p>
-<table>
-<thead>
-<tr>
-<th>机器</th>
-<th>IP地址</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Mac IP地址:</td>
-<td>192.168.31.196</td>
-</tr>
-<tr>
-<td>虚拟机IP:</td>
-<td>192.168.31.221</td>
-</tr>
-<tr>
-<td>Docker网络IP地址</td>
-<td>172.19.0.3</td>
-</tr>
-</tbody></table>
-<p>当前 Mac 可以ping通 虚拟机，虚拟机可以ping同虚拟机中的Docker网络，但是Mac无法ping同虚拟机中的Docker</p>
-<p>那么可以通过添加路由表到Mac中：</p>
-<pre><code>sudo route -n add -net 172.19.0.0 -netmask 255.255.255.0 192.168.31.221</code></pre>
-<p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
-<p>那么路由表信息如下：（查看路由表： <code>netstat -nr</code>）</p>
-<pre><code>Internet:
-Destination        Gateway            Flags        Refs      Use   Netif Expire
-172.19/24          192.168.31.221     UGSc            0        3     en0</code></pre>
-<p>如果需要删除路由表，执行如下命令：</p>
-<pre><code>sudo route delete 172.19/24</code></pre>
-<h2 id="2、Windows连接到虚拟机的docker网络"><a href="#2、Windows连接到虚拟机的docker网络" class="headerlink" title="2、Windows连接到虚拟机的docker网络"></a>2、Windows连接到虚拟机的docker网络</h2><p>假设有Windows、虚拟机、Docker中的IP地址如下：</p>
-<table>
-<thead>
-<tr>
-<th>机器</th>
-<th>IP地址</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>WindowsIP地址:</td>
-<td>192.168.31.196</td>
-</tr>
-<tr>
-<td>虚拟机IP:</td>
-<td>192.168.31.221</td>
-</tr>
-<tr>
-<td>Docker网络IP地址</td>
-<td>172.19.0.3</td>
-</tr>
-</tbody></table>
-<p>在windows中添加路由地址：</p>
-<pre><code>ROUTE -p add 172.19.0.0 mask 255.255.255.0 192.168.31.221</code></pre>
-<p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
-<p>删除路由：</p>
-<pre><code>route delete 172.19.0.0 mask 255.255.255.0 192.168.31.221</code></pre>
-<p><strong>注意点：需要关闭虚拟机的防火墙</strong></p>
+                <p>日常业务开发中我们有时候需要对json字符串转换成实体时做一些自对应的映射，今天我们使用Gson的TypeAdapter来实现</p>
+<h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>最近在做考勤系统的时候，有一个页面展示需要根据每天考勤类型显示不同的显示符号，比如：</p>
+<pre><code>事假：△
+调休：*
+年假：□
+正常：V
+早退：#
+加班：☆</code></pre>
+<p>原始数据格式：</p>
+<pre><code class="line-numbers language-json">&#123;
+  &quot;01&quot;: &quot;3&quot;,
+  &quot;02&quot;: &quot;3&quot;,
+  &quot;06&quot;: &quot;4&quot;,
+  &quot;07&quot;: &quot;3&quot;,
+  &quot;08&quot;: &quot;3&quot;,
+  &quot;11&quot;: &quot;0&quot;,
+  &quot;12&quot;: &quot;3&quot;,
+  &quot;13&quot;: &quot;3&quot;,
+  &quot;14&quot;: &quot;3&quot;,
+  &quot;15&quot;: &quot;3&quot;,
+  &quot;18&quot;: &quot;3&quot;,
+  &quot;19&quot;: &quot;3&quot;,
+  &quot;20&quot;: &quot;3&quot;,
+  &quot;21&quot;: &quot;4&quot;,
+  &quot;22&quot;: &quot;0&quot;,
+  &quot;24&quot;: &quot;0&quot;,
+  &quot;25&quot;: &quot;3&quot;,
+  &quot;26&quot;: &quot;4&quot;,
+  &quot;27&quot;: &quot;4&quot;,
+  &quot;28&quot;: &quot;3&quot;,
+  &quot;29&quot;: &quot;3&quot;,
+  &quot;30&quot;: &quot;1&quot;,
+  &quot;31&quot;: &quot;7&quot;
+&#125;</code></pre>
+<p>对应的实体类：</p>
+<pre><code class="line-numbers language-java">public class CheckReport &#123;
+    private String day_1;
+    private String day_2;
+    private String day_3;
+    private String day_4;
+    private String day_5;
+    private String day_6;
+    private String day_7;
+    private String day_8;
+    private String day_9;
+    private String day_10;
+    private String day_11;
+    private String day_12;
+    private String day_13;
+    private String day_14;
+    private String day_15;
+    private String day_16;
+    private String day_17;
+    private String day_18;
+    private String day_19;
+    private String day_20;
+    private String day_21;
+    private String day_22;
+    private String day_23;
+    private String day_24;
+    private String day_25;
+    private String day_26;
+    private String day_27;
+    private String day_28;
+    private String day_29;
+    private String day_30;
+    private String day_31;
+&#125;</code></pre>
+<p>我们需要将json格式转换如下数据格式：</p>
+<pre><code class="line-numbers language-json">&#123;
+  &quot;day_1&quot;: &quot;正常出勤&quot;,
+  &quot;day_2&quot;: &quot;正常出勤&quot;,
+  &quot;day_6&quot;: &quot;早退&quot;,
+  &quot;day_7&quot;: &quot;正常出勤&quot;,
+  &quot;day_8&quot;: &quot;正常出勤&quot;,
+  &quot;day_11&quot;: &quot;事假&quot;,
+  &quot;day_12&quot;: &quot;正常出勤&quot;,
+  &quot;day_13&quot;: &quot;正常出勤&quot;,
+  &quot;day_14&quot;: &quot;正常出勤&quot;,
+  &quot;day_15&quot;: &quot;正常出勤&quot;,
+  &quot;day_18&quot;: &quot;正常出勤&quot;,
+  &quot;day_19&quot;: &quot;正常出勤&quot;,
+  &quot;day_20&quot;: &quot;正常出勤&quot;,
+  &quot;day_21&quot;: &quot;早退&quot;,
+  &quot;day_22&quot;: &quot;事假&quot;,
+  &quot;day_24&quot;: &quot;事假&quot;,
+  &quot;day_25&quot;: &quot;正常出勤&quot;,
+  &quot;day_26&quot;: &quot;早退&quot;,
+  &quot;day_27&quot;: &quot;早退&quot;,
+  &quot;day_28&quot;: &quot;正常出勤&quot;,
+  &quot;day_29&quot;: &quot;正常出勤&quot;,
+  &quot;day_30&quot;: &quot;调休&quot;,
+  &quot;day_31&quot;: &quot;加班&quot;
+&#125;</code></pre>
+<p>那么传统的方式就无法实现了</p>
+<h2 id="2、实现步骤"><a href="#2、实现步骤" class="headerlink" title="2、实现步骤"></a>2、实现步骤</h2><h3 id="2-1、引入依赖"><a href="#2-1、引入依赖" class="headerlink" title="2.1、引入依赖"></a>2.1、引入依赖</h3><p>这里使用Gson的依赖：</p>
+<pre><code class="line-numbers language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;
+    &lt;artifactId&gt;gson&lt;/artifactId&gt;
+    &lt;version&gt;$&#123;latest.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="2-2、自定义TypeAdapter"><a href="#2-2、自定义TypeAdapter" class="headerlink" title="2.2、自定义TypeAdapter"></a>2.2、自定义TypeAdapter</h3><pre><code class="line-numbers language-java">public class CheckResultTypeAdapter extends TypeAdapter&lt;CheckReport&gt; &#123;
+    // 这个是对象转成json字符串的时候使用的写出的方法
+    @Override
+    public void write(JsonWriter out, CheckReport value) throws IOException &#123;
+        out.beginObject();
+        writeData(out, value);
+        out.endObject();
+    &#125;
+
+    private void writeData(JsonWriter out, CheckReport report) &#123;
+        final Field[] fields = report.getClass().getDeclaredFields();
+        for (Field field : fields) &#123;
+            try &#123;
+                field.setAccessible(true);
+                String filedName = field.getName();
+                Object resultVal = field.get(report);
+                if (resultVal == null) &#123;
+                    continue;
+                &#125;
+                String value = String.valueOf(resultVal);
+                CheckResultEnum resultEnum = CheckResultEnum.fromDesc(value);
+                value = String.valueOf(resultEnum.getCode());
+                if (filedName.contains(&quot;day_&quot;)) &#123;
+                    filedName = filedName.replace(&quot;day_&quot;, &quot;&quot;);
+                    filedName = String.format(&quot;%02d&quot;, Integer.parseInt(filedName));
+                &#125;
+                out.name(filedName).value(value);
+            &#125; catch (Exception e) &#123;
+                //ignore
+            &#125;
+        &#125;
+    &#125;
+    // 从字符串中读取数据将其转换成对象
+    @Override
+    public CheckReport read(JsonReader reader) throws IOException &#123;
+        reader.beginObject();
+        String fieldName = &quot;&quot;;
+        CheckReport detail = new CheckReport();
+        while (reader.hasNext()) &#123;
+            JsonToken token = reader.peek();
+            if (token.equals(JsonToken.NAME)) &#123;
+                fieldName = reader.nextName();
+            &#125;
+            token = reader.peek();
+            setData(detail, fieldName, reader.nextString());
+        &#125;
+        reader.endObject();
+        return detail;
+    &#125;
+
+    private void setData(CheckReport detail, String fieldName, String nextString) &#123;
+        try &#123;
+            // 通过反射的方式将数据赋值
+            Class&lt;?&gt; clazz = detail.getClass();
+            String actualName = &quot;day_&quot; + Integer.parseInt(fieldName);
+            Field field = clazz.getDeclaredField(actualName);
+            field.setAccessible(true);
+            StringBuilder sb = new StringBuilder();
+            if (nextString.contains(&quot;,&quot;)) &#123;
+                String[] split = nextString.split(&quot;,&quot;);
+                for (String data : split) &#123;
+                    CheckResultEnum resultTypeEnum = CheckResultEnum.fromCode(Integer.parseInt(data));
+                    if (resultTypeEnum != null) &#123;
+                        sb.append(resultTypeEnum.getDesc());
+                    &#125;
+                &#125;
+            &#125; else &#123;
+                CheckResultEnum resultTypeEnum = CheckResultEnum.fromCode(Integer.parseInt(nextString));
+                if (resultTypeEnum != null) &#123;
+                    sb.append(resultTypeEnum.getDesc());
+                &#125;
+            &#125;
+            field.set(detail, sb.toString());
+        &#125; catch (Exception e) &#123;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3、使用"><a href="#2-3、使用" class="headerlink" title="2.3、使用"></a>2.3、使用</h3><pre><code class="line-numbers language-java">public static void main(String[] args) &#123;
+    GsonBuilder builder = new GsonBuilder();
+    // 通过GsonBuilder将自定义的adapter注册进去
+    builder.registerTypeAdapter(CheckReport.class, new CheckResultTypeAdapter());
+    builder.setPrettyPrinting();
+    Gson gson = builder.create();
+    String json = &quot;&#123;\n&quot;
+            + &quot;    \&quot;01\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;02\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;06\&quot;:\&quot;4\&quot;,\n&quot;
+            + &quot;    \&quot;07\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;08\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;11\&quot;:\&quot;0\&quot;,\n&quot;
+            + &quot;    \&quot;12\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;13\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;14\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;15\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;18\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;19\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;20\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;21\&quot;:\&quot;4\&quot;,\n&quot;
+            + &quot;    \&quot;22\&quot;:\&quot;0\&quot;,\n&quot;
+            + &quot;    \&quot;24\&quot;:\&quot;0\&quot;,\n&quot;
+            + &quot;    \&quot;25\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;26\&quot;:\&quot;4\&quot;,\n&quot;
+            + &quot;    \&quot;27\&quot;:\&quot;4\&quot;,\n&quot;
+            + &quot;    \&quot;28\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;29\&quot;:\&quot;3\&quot;,\n&quot;
+            + &quot;    \&quot;30\&quot;:\&quot;1\&quot;,\n&quot;
+            + &quot;    \&quot;31\&quot;:\&quot;7\&quot;\n&quot;
+            + &quot;&#125;&quot;;
+    final CheckReport report = gson.fromJson(json, CheckReport.class);
+    System.out.println(JSON.toJSONString(report));
+    System.out.println(gson.toJson(report));
+&#125;</code></pre>
+<p>输出结果：</p>
+<pre><code class="line-numbers language-java">// 输出的是正常对象转换成json
+&#123;&quot;day_1&quot;:&quot;正常出勤&quot;,&quot;day_11&quot;:&quot;事假&quot;,&quot;day_12&quot;:&quot;正常出勤&quot;,&quot;day_13&quot;:&quot;正常出勤&quot;,&quot;day_14&quot;:&quot;正常出勤&quot;,&quot;day_15&quot;:&quot;正常出勤&quot;,&quot;day_18&quot;:&quot;正常出勤&quot;,&quot;day_19&quot;:&quot;正常出勤&quot;,&quot;day_2&quot;:&quot;正常出勤&quot;,&quot;day_20&quot;:&quot;正常出勤&quot;,&quot;day_21&quot;:&quot;早退&quot;,&quot;day_22&quot;:&quot;事假&quot;,&quot;day_24&quot;:&quot;事假&quot;,&quot;day_25&quot;:&quot;正常出勤&quot;,&quot;day_26&quot;:&quot;早退&quot;,&quot;day_27&quot;:&quot;早退&quot;,&quot;day_28&quot;:&quot;正常出勤&quot;,&quot;day_29&quot;:&quot;正常出勤&quot;,&quot;day_30&quot;:&quot;调休&quot;,&quot;day_31&quot;:&quot;加班&quot;,&quot;day_6&quot;:&quot;早退&quot;,&quot;day_7&quot;:&quot;正常出勤&quot;,&quot;day_8&quot;:&quot;正常出勤&quot;&#125;
+// 通过Gson将对象还原成了原始json字符串
+&#123;
+  &quot;01&quot;: &quot;3&quot;,
+  &quot;02&quot;: &quot;3&quot;,
+  &quot;06&quot;: &quot;4&quot;,
+  &quot;07&quot;: &quot;3&quot;,
+  &quot;08&quot;: &quot;3&quot;,
+  &quot;11&quot;: &quot;0&quot;,
+  &quot;12&quot;: &quot;3&quot;,
+  &quot;13&quot;: &quot;3&quot;,
+  &quot;14&quot;: &quot;3&quot;,
+  &quot;15&quot;: &quot;3&quot;,
+  &quot;18&quot;: &quot;3&quot;,
+  &quot;19&quot;: &quot;3&quot;,
+  &quot;20&quot;: &quot;3&quot;,
+  &quot;21&quot;: &quot;4&quot;,
+  &quot;22&quot;: &quot;0&quot;,
+  &quot;24&quot;: &quot;0&quot;,
+  &quot;25&quot;: &quot;3&quot;,
+  &quot;26&quot;: &quot;4&quot;,
+  &quot;27&quot;: &quot;4&quot;,
+  &quot;28&quot;: &quot;3&quot;,
+  &quot;29&quot;: &quot;3&quot;,
+  &quot;30&quot;: &quot;1&quot;,
+  &quot;31&quot;: &quot;7&quot;
+&#125;</code></pre>
 
             </div>
             <hr/>
@@ -479,7 +663,7 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.chenlanqing.com/2020/11/15/Docker%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A/">http://www.chenlanqing.com/2020/11/15/Docker%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A/</a>
+                    <a href="http://www.chenlanqing.com/2022/06/03/Gson%E8%87%AA%E5%AF%B9%E5%BA%94%E6%98%A0%E5%B0%84/">http://www.chenlanqing.com/2022/06/03/Gson%E8%87%AA%E5%AF%B9%E5%BA%94%E6%98%A0%E5%B0%84/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -517,8 +701,8 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Docker/">
-                                    <span class="chip bg-color">Docker</span>
+                                <a href="/tags/%E6%A1%86%E6%9E%B6/">
+                                    <span class="chip bg-color">框架</span>
                                 </a>
                             
                         </div>
@@ -557,9 +741,10 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/06/03/Gson%E8%87%AA%E5%AF%B9%E5%BA%94%E6%98%A0%E5%B0%84/">
                     <div class="card-image">
@@ -577,9 +762,9 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -592,6 +777,7 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -610,13 +796,13 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/15/SpringBoot%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                <a href="/2020/11/15/Docker%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="SpringBoot多环境配置文件">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Docker网络配置">
                         
-                        <span class="card-title">SpringBoot多环境配置文件</span>
+                        <span class="card-title">Docker网络配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -633,8 +819,8 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category">
-                                    SpringBoot
+                            <a href="/categories/Docker/" class="post-category">
+                                    Docker
                                 </a>
                             
                             
@@ -644,8 +830,8 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SpringBoot/">
-                        <span class="chip bg-color">SpringBoot</span>
+                    <a href="/tags/Docker/">
+                        <span class="chip bg-color">Docker</span>
                     </a>
                     
                 </div>

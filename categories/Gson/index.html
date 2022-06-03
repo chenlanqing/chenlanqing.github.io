@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类, 编程,大数据,生活">
+    <meta name="keywords" content="分类: Gson, 编程,大数据,生活">
     <meta name="description" content="本站主要是个人技术学习过程的资料记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类 | QingFan&#39;s Blog</title>
+    <title>分类: Gson | QingFan&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -284,7 +284,7 @@
                 
                 <a href="/categories/Gson/" title="Gson: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
+                             chip-active "
                             style="background-color: #F5EEF8;">Gson
                         <span class="tag-length">1</span>
                     </span>
@@ -325,65 +325,64 @@
 
 
     
-    <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
 
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
-    </div>
-</div>
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2022/06/03/Gson%E8%87%AA%E5%AF%B9%E5%BA%94%E6%98%A0%E5%B0%84/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Gson自定义映射">
+                            
+                            <span class="card-title">Gson自定义映射</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                日常业务开发中我们有时候需要对json字符串转换成实体时做一些自对应的映射，今天我们使用Gson的TypeAdapter来实现
+1、背景最近在做考勤系统的时候，有一个页面展示需要根据每天考勤类型显示不同的显示符号，比如：
+事假：△
+调休：*
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-03
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Gson/" class="post-category">
+                                    Gson
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
-
-    
-
-    let option = {
-        title: {
-            left: 'center',
-            text: '文章分类雷达图',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"Docker","max":2},{"name":"Gson","max":2},{"name":"SpringBoot","max":2},{"name":"JDK源码","max":2},{"name":"分布式","max":2}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [1,1,1,1,1],
-                    name : '文章分类数量'
-                }
-            ]
-        }]
-    };
-
-    radarChart.setOption(option);
-</script>
-
-    
-
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%A1%86%E6%9E%B6/">
+                            <span class="chip bg-color">框架</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </article>
 </main>
+
+
 
 
     <footer class="page-footer bg-color">

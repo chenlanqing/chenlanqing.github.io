@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 
@@ -379,7 +379,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    581
+                    630
                 </div>
                 
 
@@ -412,50 +412,48 @@
 <p><img src="/images/SpringBoot-profile%E7%BC%96%E8%AF%91%E5%90%8E.png"></p>
 <p>但是如果编译后的jar包不包含非当前环境需要的properties文件，可以通过maven的的方式来构建，详细步骤如下：</p>
 <p><strong>（1）application.properties改为如下代码：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">spring.profiles.active&#x3D;@build.profile.id@<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code>spring.profiles.active=@build.profile.id@</code></pre>
 <p><strong>（2）pom.xml增加如下代码：</strong></p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span><span class="token punctuation">></span></span>
-	...
-	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/resources<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>excludes</span><span class="token punctuation">></span></span>
-                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclude</span><span class="token punctuation">></span></span>application-*.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclude</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>excludes</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/resources<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
-                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>application-$&#123;build.profile.id&#125;.properties<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profiles</span><span class="token punctuation">></span></span>
-        <span class="token comment">&lt;!--开发环境--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build.profile.id</span><span class="token punctuation">></span></span>dev<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build.profile.id</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
-        <span class="token comment">&lt;!--生产环境--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>prod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build.profile.id</span><span class="token punctuation">></span></span>prod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build.profile.id</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profiles</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="line-numbers language-xml">&lt;project&gt;
+    ...
+      &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+                &lt;excludes&gt;
+                    &lt;exclude&gt;application-*.properties&lt;/exclude&gt;
+                &lt;/excludes&gt;
+            &lt;/resource&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;filtering&gt;false&lt;/filtering&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;application-$&#123;build.profile.id&#125;.properties&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+    &lt;profiles&gt;
+        &lt;!--开发环境--&gt;
+        &lt;profile&gt;
+            &lt;id&gt;dev&lt;/id&gt;
+            &lt;properties&gt;
+                &lt;build.profile.id&gt;dev&lt;/build.profile.id&gt;
+            &lt;/properties&gt;
+            &lt;activation&gt;
+                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+            &lt;/activation&gt;
+        &lt;/profile&gt;
+        &lt;!--生产环境--&gt;
+        &lt;profile&gt;
+            &lt;id&gt;prod&lt;/id&gt;
+            &lt;properties&gt;
+                &lt;build.profile.id&gt;prod&lt;/build.profile.id&gt;
+            &lt;/properties&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;
+&lt;/project&gt;</code></pre>
 <p><strong>（3）通过如下maven命令执行：</strong></p>
 <p>通过IDEA中执行如下操作：</p>
 <ul>
@@ -875,6 +873,8 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </footer>
 
 <div class="progress-bar"></div>
+<link rel="stylesheet" href="/css/prism.css">
+<script src="/js/prism.js" async></script>
 
 
     <!-- 搜索遮罩框 -->

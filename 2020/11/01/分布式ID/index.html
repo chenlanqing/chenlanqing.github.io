@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 
@@ -446,18 +446,17 @@
 </ul>
 <h3 id="3-3、为什么UUID会导致数据库性能变差"><a href="#3-3、为什么UUID会导致数据库性能变差" class="headerlink" title="3.3、为什么UUID会导致数据库性能变差"></a>3.3、为什么UUID会导致数据库性能变差</h3><p>涉及到B+数索引的分裂：果我们的ID按递增的顺序来插入；比如陆续插入8，9，10；新的ID都只会插入到最后一个节点当中。当最后一个节点满了；会裂变出新的节点。这样的插入是性能比较高的插入；因为这样节点的分裂次数最少；而且充分利用了每一个节点的空间。但是；如果我们的插入完全无序；不但会导致一些中间节点产生分裂；也会白白创造出很多不饱和的节点；这样大大降低了数据库插入的性能</p>
 <h3 id="3-4、生成有序的UUID"><a href="#3-4、生成有序的UUID" class="headerlink" title="3.4、生成有序的UUID"></a>3.4、生成有序的UUID</h3><p>可以使用<code>fasterxml.uuid</code>来生成有序的UUID，引入POM文件：</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!-- 顺序UUID --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.fasterxml.uuid<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>java-uuid-generator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.1.4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span> 	<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="line-numbers language-xml">&lt;!-- 顺序UUID --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.uuid&lt;/groupId&gt;
+    &lt;artifactId&gt;java-uuid-generator&lt;/artifactId&gt;
+    &lt;version&gt;3.1.4&lt;/version&gt;
+&lt;/dependency&gt;     </code></pre>
 <p>实现如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static String generatorUUID()&#123;
-	TimeBasedGenerator timeBasedGenerator &#x3D; Generators.timeBasedGenerator(EthernetAddress.fromInterface());
-	return timeBasedGenerator.generate().toString();
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="line-numbers language-java">public static String generatorUUID()&#123;
+    TimeBasedGenerator timeBasedGenerator = Generators.timeBasedGenerator(EthernetAddress.fromInterface());
+    return timeBasedGenerator.generate().toString();
+&#125;</code></pre>
 <h2 id="4、Redis生成ID"><a href="#4、Redis生成ID" class="headerlink" title="4、Redis生成ID"></a>4、Redis生成ID</h2><p>当使用数据库来生成ID性能不够要求的时候；可以尝试使用Redis来生成。主要依赖于Redis是单线程的；所以可以用于生成全局唯一ID。（使用Redis的原子操作incr 和 incrby 来实现）比较适合使用Redis来生成每天从0开始的流水号；</p>
 <ul>
 <li><p><strong>4.1.优点：</strong></p>
@@ -500,8 +499,8 @@
 <li>从设计和编码角度来看，一个有效的措施是缓存历史时间戳，然后再序列生成之前校验，如果出现当前时间落后于历史时间的不合理情况，可以采取相应的动作，要么重试、等待时间重新一致，或者直接提示服务不可用。（NTP问题）</li>
 </ul>
 <h2 id="6、MongoDB的ObjectId"><a href="#6、MongoDB的ObjectId" class="headerlink" title="6、MongoDB的ObjectId"></a>6、MongoDB的ObjectId</h2><p>ObjectId使用12字节的存储空间；其生成方式如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">|0|1|2|3|4|5|6|7|8|9|10|11|
-|时间戳|机器ID|PID|计数器 |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre><code>|0|1|2|3|4|5|6|7|8|9|10|11|
+|时间戳|机器ID|PID|计数器 |</code></pre>
 <p>前四个字节时间戳是从标准纪元开始的时间戳；单位为秒；有如下特性：</p>
 <ul>
 <li>时间戳与后边5个字节一块；保证秒级别的唯一性;</li>
@@ -527,31 +526,30 @@
 </li>
 </ul>
 <h3 id="8-2、DefaultUidGenerator"><a href="#8-2、DefaultUidGenerator" class="headerlink" title="8.2、DefaultUidGenerator"></a>8.2、DefaultUidGenerator</h3><p>DefaultUidGenerator的产生id的方法与基本上就是常见的snowflake算法实现，仅有一些不同，如以秒为为单位而不是毫秒：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">protected synchronized long nextId() &#123;
-	long currentSecond &#x3D; getCurrentSecond();
-	&#x2F;&#x2F; Clock moved backwards, refuse to generate uid
-	if (currentSecond &lt; lastSecond) &#123;
-		long refusedSeconds &#x3D; lastSecond - currentSecond;
-		throw new UidGenerateException(&quot;Clock moved backwards. Refusing for %d seconds&quot;, refusedSeconds);
-	&#125;
-	&#x2F;&#x2F; At the same second, increase sequence
-	if (currentSecond &#x3D;&#x3D; lastSecond) &#123;
-		sequence &#x3D; (sequence + 1) &amp; bitsAllocator.getMaxSequence();
-		&#x2F;&#x2F; Exceed the max sequence, we wait the next second to generate uid
-		if (sequence &#x3D;&#x3D; 0) &#123;
-			currentSecond &#x3D; getNextSecond(lastSecond);
-		&#125;
-	&#x2F;&#x2F; At the different second, sequence restart from zero
-	&#125; else &#123;
-		sequence &#x3D; 0L;
-	&#125;
+<pre><code class="line-numbers language-java">protected synchronized long nextId() &#123;
+    long currentSecond = getCurrentSecond();
+    // Clock moved backwards, refuse to generate uid
+    if (currentSecond &lt; lastSecond) &#123;
+        long refusedSeconds = lastSecond - currentSecond;
+        throw new UidGenerateException(&quot;Clock moved backwards. Refusing for %d seconds&quot;, refusedSeconds);
+    &#125;
+    // At the same second, increase sequence
+    if (currentSecond == lastSecond) &#123;
+        sequence = (sequence + 1) &amp; bitsAllocator.getMaxSequence();
+        // Exceed the max sequence, we wait the next second to generate uid
+        if (sequence == 0) &#123;
+            currentSecond = getNextSecond(lastSecond);
+        &#125;
+    // At the different second, sequence restart from zero
+    &#125; else &#123;
+        sequence = 0L;
+    &#125;
 
-	lastSecond &#x3D; currentSecond;
+    lastSecond = currentSecond;
 
-	&#x2F;&#x2F; Allocate bits for UID
-	return bitsAllocator.allocate(currentSecond - epochSeconds, workerId, sequence);
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+    // Allocate bits for UID
+    return bitsAllocator.allocate(currentSecond - epochSeconds, workerId, sequence);
+&#125;</code></pre>
 <h3 id="8-3、CachedUidGenerator"><a href="#8-3、CachedUidGenerator" class="headerlink" title="8.3、CachedUidGenerator"></a>8.3、CachedUidGenerator</h3><p>在实现上, UidGenerator通过借用未来时间来解决sequence天然存在的并发限制; 采用RingBuffer来缓存已生成的UID, 并行化UID的生产和消费, 同时对CacheLine补齐，避免了由RingBuffer带来的硬件级「伪共享」问题。最终单机QPS可达600万；</p>
 <p>RingBuffer环形数组，数组每个元素成为一个slot。RingBuffer容量，默认为Snowflake算法中sequence最大值，且为2^N。可通过boostPower配置进行扩容，以提高RingBuffer 读写吞吐量。</p>
 <p>Tail指针、Cursor指针用于环形数组上读写slot：</p>
@@ -602,20 +600,20 @@
 <p>通过REST API获取分布式唯一ID，请求实例如下，bizType和token的值请参考tiny_id_token表，获取唯一ID：<code>http://localhost:9999/tinyid/id/nextId?bizType=test&amp;token=0f673adf80504e2eaa552f5d791b644c</code>；</p>
 <p><strong>Client集成：</strong></p>
 <p>tinyid还支持Client集成模式，只需要引入如下Maven坐标：</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.xiaoju.uemc.tinyid<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>tinyid-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>$&#123;tinyid.version&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="line-numbers language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.xiaoju.uemc.tinyid&lt;/groupId&gt;
+    &lt;artifactId&gt;tinyid-client&lt;/artifactId&gt;
+    &lt;version&gt;$&#123;tinyid.version&#125;&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
 <p>然后在你的classpath路径下创建配置文件<code>tinyid_client.properties</code>，内容如下，这两个参数就是<code>IdGeneratorFactoryClient.java</code>中tinyid服务端请求地址<code>http://&#123;0&#125;/tinyid/id/nextSegmentIdSimple?token=&#123;1&#125;&amp;bizType=</code>的第一个和第二个参数：</p>
-<pre class="line-numbers language-none"><code class="language-none">tinyid.server&#x3D;localhost:9999
-tinyid.token&#x3D;0f673adf80504e2eaa552f5d791b644c<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre><code>tinyid.server=localhost:9999
+tinyid.token=0f673adf80504e2eaa552f5d791b644c</code></pre>
 <p><code>tinyid.server</code>还支持多个地址配置，多个地址之间以英文逗号隔开，例如：<code>tinyid.server=host1:9999,tinyid.server=host2:9999</code>；</p>
 <p>通过调用tinyid封装的API获取分布式ID，实例代码如下，test就是bizType的值：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F; 单个分布式ID获取
-Long id &#x3D; TinyId.nextId(&quot;test&quot;);
-&#x2F;&#x2F; 多个分布式ID批量获取
-List&lt;Long&gt; ids &#x3D; TinyId.nextId(&quot;test&quot;, 10);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="line-numbers language-java">// 单个分布式ID获取
+Long id = TinyId.nextId(&quot;test&quot;);
+// 多个分布式ID批量获取
+List&lt;Long&gt; ids = TinyId.nextId(&quot;test&quot;, 10);</code></pre>
 <p>通过配置可知，<code>tinyid-client</code>本质上还是依赖<code>tinyid-server</code>，只不过它封装了对<code>tinyid-server</code>的HTTP请求，然后暴露最简单的API给用户使用而已。它对<code>tinyid-server</code>的HTTP请求封装在<code>TinyIdHttpUtils.java</code>中，依赖JDK原生的<code>HttpURLConnection</code></p>
 <h3 id="9-2、原理"><a href="#9-2、原理" class="headerlink" title="9.2、原理"></a>9.2、原理</h3><p>Tinyid的原理非常简单，通过数据库表中的数据基本是就能猜出个八九不离十，就是经典的segment模式；以同一个bizType为例，每个<code>tinyid-server</code>会分配到不同的segment，例如第一个<code>tinyid-server</code>分配到<code>(1000, 2000]</code>，第二个<code>tinyid-server</code>分配到<code>(2000, 3000]</code>，第3个<code>tinyid-server</code>分配到<code>(3000, 4000]</code>：</p>
 <p><img src="/images/TinyId%E5%8E%9F%E7%90%86%E5%9B%BE.png"></p>
@@ -1042,6 +1040,8 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </footer>
 
 <div class="progress-bar"></div>
+<link rel="stylesheet" href="/css/prism.css">
+<script src="/js/prism.js" async></script>
 
 
     <!-- 搜索遮罩框 -->
