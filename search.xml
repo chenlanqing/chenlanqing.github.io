@@ -26,14 +26,17 @@
 </tbody></table>
 <p>当前 Mac 可以ping通 虚拟机，虚拟机可以ping同虚拟机中的Docker网络，但是Mac无法ping同虚拟机中的Docker</p>
 <p>那么可以通过添加路由表到Mac中：</p>
-<pre><code>sudo route -n add -net 172.19.0.0 -netmask 255.255.255.0 192.168.31.221</code></pre>
+<pre><code>sudo route -n add -net 172.19.0.0 -netmask 255.255.255.0 192.168.31.221
+</code></pre>
 <p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
 <p>那么路由表信息如下：（查看路由表： <code>netstat -nr</code>）</p>
 <pre><code>Internet:
 Destination        Gateway            Flags        Refs      Use   Netif Expire
-172.19/24          192.168.31.221     UGSc            0        3     en0</code></pre>
+172.19/24          192.168.31.221     UGSc            0        3     en0
+</code></pre>
 <p>如果需要删除路由表，执行如下命令：</p>
-<pre><code>sudo route delete 172.19/24</code></pre>
+<pre><code>sudo route delete 172.19/24
+</code></pre>
 <h2 id="2、Windows连接到虚拟机的docker网络"><a href="#2、Windows连接到虚拟机的docker网络" class="headerlink" title="2、Windows连接到虚拟机的docker网络"></a>2、Windows连接到虚拟机的docker网络</h2><p>假设有Windows、虚拟机、Docker中的IP地址如下：</p>
 <table>
 <thead>
@@ -56,10 +59,12 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
 </tr>
 </tbody></table>
 <p>在windows中添加路由地址：</p>
-<pre><code>ROUTE -p add 172.19.0.0 mask 255.255.255.0 192.168.31.221</code></pre>
+<pre><code>ROUTE -p add 172.19.0.0 mask 255.255.255.0 192.168.31.221
+</code></pre>
 <p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
 <p>删除路由：</p>
-<pre><code>route delete 172.19.0.0 mask 255.255.255.0 192.168.31.221</code></pre>
+<pre><code>route delete 172.19.0.0 mask 255.255.255.0 192.168.31.221
+</code></pre>
 <p><strong>注意点：需要关闭虚拟机的防火墙</strong></p>
 ]]></content>
       <categories>
@@ -68,88 +73,6 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
       <tags>
         <tag>Docker</tag>
         <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA常用开发配置</title>
-    <url>/2025/02/09/IDEA%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="一、常见配置"><a href="#一、常见配置" class="headerlink" title="一、常见配置"></a>一、常见配置</h1><h2 id="1、添加类签名及版本信息"><a href="#1、添加类签名及版本信息" class="headerlink" title="1、添加类签名及版本信息"></a>1、添加类签名及版本信息</h2><p>Settings -&gt; Editor -&gt; File and Code Templates</p>
-<p><img src="/images/IDEA-Template.png"></p>
-<p>上面的<code>FileHeader.java</code>可以定义为通用的文件注释，还可以增加版权信息等</p>
-<p><img src="/images/IDEA-Template2.png"></p>
-<p>将上面定义好的的FileHeader引入到到include里的Class里面，使用parse来解析：</p>
-<pre><code class="line-numbers language-java">#if ($&#123;PACKAGE_NAME&#125; &amp;&amp; $&#123;PACKAGE_NAME&#125; != &quot;&quot;)package $&#123;PACKAGE_NAME&#125;;#end
-#parse(&quot;File Header.java&quot;)
-public class $&#123;NAME&#125; &#123;
-&#125;</code></pre>
-<p>同样的，可以再include里面添加模板文件，比如添加了一个NettyServerClass</p>
-<p><img src="/images/IDEA-Template3.png"></p>
-<p>在new里面可以选择NettyServerClass作为Java类文件模板：</p>
-<p><img src="/images/IDEA-Template4.png"></p>
-<h2 id="2、Maven"><a href="#2、Maven" class="headerlink" title="2、Maven"></a>2、Maven</h2><p>Settings -&gt; Build, Execution, Deployment -&gt; Build Tools -&gt; Maven</p>
-<p><img src="/images/IDEA-Maven.png"></p>
-<h2 id="3、方法分割线以及字符缩进"><a href="#3、方法分割线以及字符缩进" class="headerlink" title="3、方法分割线以及字符缩进"></a>3、方法分割线以及字符缩进</h2><p><img src="/images/IDEA-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%E5%88%86%E5%89%B2%E7%BA%BF.png"></p>
-<h2 id="4、修改idea默认配置路径"><a href="#4、修改idea默认配置路径" class="headerlink" title="4、修改idea默认配置路径"></a>4、修改idea默认配置路径</h2><ul>
-<li><a href="https://intellij-support.jetbrains.com/hc/en-us/articles/207240985-Changing-IDE-default-directories-used-for-config-plugins-and-caches-storage">Changing IDE default directories used for config, plugins, and caches storage</a></li>
-</ul>
-<p>以Windows为例，IDEA默认配置路径基本都是在C盘目录下的：</p>
-<pre><code class="line-numbers language-java">// idea的相关配置、插件目录
-C:&#123;user.home&#125;/AppData/Roaming/JetBrains/IdeaIC2024.2
-// idea的相关系统配置目录：缓存、日志等
-C:&#123;user.home&#125;/AppData/Local/JetBrains/IdeaIC2024.2</code></pre>
-<p>修改 <code>IDE_HOME\bin\idea.properties</code> 文件中的注释更改默认值，确保取消注释定义这些属性的行：</p>
-<pre><code class="line-numbers language-properties">idea.config.path=
-idea.system.path=
-idea.plugins.path=
-idea.log.path=</code></pre>
-<p>修改对应的配置为：</p>
-<pre><code class="line-numbers language-properties">## 配置的目录
-idea.config.path=D:/cache/idea/trunk-config
-## 配置缓存的目录：index
-idea.system.path=D:/cache/idea/trunk-system 
-## 配置插件的目录，一般是在 config目录里面的
-idea.plugins.path=D:/cache/idea/trunk-config/plugins
-## 配置日志目录
-idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
-<p><strong>如何将默认配置的数据移动到新目录中：</strong></p>
-<ul>
-<li>将<code>C:&#123;user.home&#125;/AppData/Roaming/JetBrains/IdeaIC2024.2</code> 移动到新的目录：<code>idea.config.path</code></li>
-<li><code>C:&#123;user.home&#125;/AppData/Local/JetBrains/IdeaIC2024.2</code> 目录下的数据不需要移动；</li>
-</ul>
-<p>做完之后即可使用原有的目录配置数据</p>
-<h1 id="二、常用插件"><a href="#二、常用插件" class="headerlink" title="二、常用插件"></a>二、常用插件</h1><ul>
-<li>阿里巴巴代码插件：Alibaba Java Coding Guidelines、Alibaba Cloud Toolkit</li>
-<li>背景图片插件：Background Image Plus</li>
-<li>格式化xml：Eclipse Code Fromatter</li>
-<li>Mybtis插件：Free Mybatis Plugin、Mybatis plugin、Mybatis xml validator、MyBatisCodeHelperPro</li>
-<li>Lombok</li>
-<li>主题插件：Material Theme UI、Atom Material Icons</li>
-<li>代码扫描插件：SonarLint</li>
-<li>CodeGlance：可以显示代码的缩略图</li>
-<li>GsonFormat：可以将一个json字符串转成对象</li>
-<li>Key Promoter X</li>
-<li>Maven Helper</li>
-<li>RestfulToolkit</li>
-<li>RestfulTool：可以根据 URL 直接跳转到对应的方法，也可以通过 controller 复制出来对应的 url</li>
-<li>Statistic</li>
-<li>VisualVM Launcher</li>
-<li>ASM</li>
-<li>mybatisX</li>
-<li>Rainbow Brackets ：括号插件</li>
-<li>GitToolBox：Git工具箱(增强)</li>
-<li>Better Highlights：代码认知复杂度</li>
-<li>Arthas</li>
-<li>CheckStyle-IDEA</li>
-<li>JRebel and XRebel</li>
-<li>Continue 是一个适配 IntelliJ IDEA 的开源 AI 助手插件，旨在通过自然语言与代码的交互来提升开发效率。与 CodeGPT、GitHub Copilot 等类似，它基于大语言模型（如 OpenAI 、DeepSeek 或其他模型），为开发者提供实时代码生成、问题解决、单元测试生成等功能。</li>
-<li>CodeGPT 是一款人工智能代码助手，是 GitHub Copilot、AI Assistant、Codiumate 和其他 JetBrains 插件的强大替代品，支持集成市面上常见的大模型</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -162,7 +85,8 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
 年假：□
 正常：V
 早退：#
-加班：☆</code></pre>
+加班：☆
+</code></pre>
 <p>原始数据格式：</p>
 <pre><code class="line-numbers language-json">&#123;
   &quot;01&quot;: &quot;3&quot;,
@@ -188,7 +112,8 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
   &quot;29&quot;: &quot;3&quot;,
   &quot;30&quot;: &quot;1&quot;,
   &quot;31&quot;: &quot;7&quot;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>对应的实体类：</p>
 <pre><code class="line-numbers language-java">public class CheckReport &#123;
     private String day_1;
@@ -222,7 +147,8 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
     private String day_29;
     private String day_30;
     private String day_31;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>我们需要将json格式转换如下数据格式：</p>
 <pre><code class="line-numbers language-json">&#123;
   &quot;day_1&quot;: &quot;正常出勤&quot;,
@@ -248,14 +174,16 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
   &quot;day_29&quot;: &quot;正常出勤&quot;,
   &quot;day_30&quot;: &quot;调休&quot;,
   &quot;day_31&quot;: &quot;加班&quot;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>那么传统的方式就无法实现了</p>
 <h2 id="2、实现步骤"><a href="#2、实现步骤" class="headerlink" title="2、实现步骤"></a>2、实现步骤</h2><h3 id="2-1、引入依赖"><a href="#2-1、引入依赖" class="headerlink" title="2.1、引入依赖"></a>2.1、引入依赖</h3><p>这里使用Gson的依赖：</p>
 <pre><code class="line-numbers language-xml">&lt;dependency&gt;
     &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;
     &lt;artifactId&gt;gson&lt;/artifactId&gt;
     &lt;version&gt;$&#123;latest.version&#125;&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <h3 id="2-2、自定义TypeAdapter"><a href="#2-2、自定义TypeAdapter" class="headerlink" title="2.2、自定义TypeAdapter"></a>2.2、自定义TypeAdapter</h3><pre><code class="line-numbers language-java">public class CheckResultTypeAdapter extends TypeAdapter&lt;CheckReport&gt; &#123;
     // 这个是对象转成json字符串的时候使用的写出的方法
     @Override
@@ -332,7 +260,8 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
         &#125; catch (Exception e) &#123;
         &#125;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="2-3、使用"><a href="#2-3、使用" class="headerlink" title="2.3、使用"></a>2.3、使用</h3><pre><code class="line-numbers language-java">public static void main(String[] args) &#123;
     GsonBuilder builder = new GsonBuilder();
     // 通过GsonBuilder将自定义的adapter注册进去
@@ -367,7 +296,8 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
     final CheckReport report = gson.fromJson(json, CheckReport.class);
     System.out.println(JSON.toJSONString(report));
     System.out.println(gson.toJson(report));
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>输出结果：</p>
 <pre><code class="line-numbers language-java">// 输出的是正常对象转换成json
 &#123;&quot;day_1&quot;:&quot;正常出勤&quot;,&quot;day_11&quot;:&quot;事假&quot;,&quot;day_12&quot;:&quot;正常出勤&quot;,&quot;day_13&quot;:&quot;正常出勤&quot;,&quot;day_14&quot;:&quot;正常出勤&quot;,&quot;day_15&quot;:&quot;正常出勤&quot;,&quot;day_18&quot;:&quot;正常出勤&quot;,&quot;day_19&quot;:&quot;正常出勤&quot;,&quot;day_2&quot;:&quot;正常出勤&quot;,&quot;day_20&quot;:&quot;正常出勤&quot;,&quot;day_21&quot;:&quot;早退&quot;,&quot;day_22&quot;:&quot;事假&quot;,&quot;day_24&quot;:&quot;事假&quot;,&quot;day_25&quot;:&quot;正常出勤&quot;,&quot;day_26&quot;:&quot;早退&quot;,&quot;day_27&quot;:&quot;早退&quot;,&quot;day_28&quot;:&quot;正常出勤&quot;,&quot;day_29&quot;:&quot;正常出勤&quot;,&quot;day_30&quot;:&quot;调休&quot;,&quot;day_31&quot;:&quot;加班&quot;,&quot;day_6&quot;:&quot;早退&quot;,&quot;day_7&quot;:&quot;正常出勤&quot;,&quot;day_8&quot;:&quot;正常出勤&quot;&#125;
@@ -396,7 +326,8 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
   &quot;29&quot;: &quot;3&quot;,
   &quot;30&quot;: &quot;1&quot;,
   &quot;31&quot;: &quot;7&quot;
-&#125;</code></pre>
+&#125;
+</code></pre>
 ]]></content>
       <categories>
         <category>Gson</category>
@@ -404,6 +335,92 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
       <tags>
         <tag>Gson</tag>
         <tag>JSON</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA常用开发配置</title>
+    <url>/2025/02/09/IDEA%E5%B8%B8%E7%94%A8%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="一、常见配置"><a href="#一、常见配置" class="headerlink" title="一、常见配置"></a>一、常见配置</h1><h2 id="1、添加类签名及版本信息"><a href="#1、添加类签名及版本信息" class="headerlink" title="1、添加类签名及版本信息"></a>1、添加类签名及版本信息</h2><p>Settings -&gt; Editor -&gt; File and Code Templates</p>
+<p><img src="/images/IDEA-Template.png"></p>
+<p>上面的<code>FileHeader.java</code>可以定义为通用的文件注释，还可以增加版权信息等</p>
+<p><img src="/images/IDEA-Template2.png"></p>
+<p>将上面定义好的的FileHeader引入到到include里的Class里面，使用parse来解析：</p>
+<pre><code class="line-numbers language-java">#if ($&#123;PACKAGE_NAME&#125; &amp;&amp; $&#123;PACKAGE_NAME&#125; != &quot;&quot;)package $&#123;PACKAGE_NAME&#125;;#end
+#parse(&quot;File Header.java&quot;)
+public class $&#123;NAME&#125; &#123;
+&#125;
+</code></pre>
+<p>同样的，可以再include里面添加模板文件，比如添加了一个NettyServerClass</p>
+<p><img src="/images/IDEA-Template3.png"></p>
+<p>在new里面可以选择NettyServerClass作为Java类文件模板：</p>
+<p><img src="/images/IDEA-Template4.png"></p>
+<h2 id="2、Maven"><a href="#2、Maven" class="headerlink" title="2、Maven"></a>2、Maven</h2><p>Settings -&gt; Build, Execution, Deployment -&gt; Build Tools -&gt; Maven</p>
+<p><img src="/images/IDEA-Maven.png"></p>
+<h2 id="3、方法分割线以及字符缩进"><a href="#3、方法分割线以及字符缩进" class="headerlink" title="3、方法分割线以及字符缩进"></a>3、方法分割线以及字符缩进</h2><p><img src="/images/IDEA-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%E5%88%86%E5%89%B2%E7%BA%BF.png"></p>
+<h2 id="4、修改idea默认配置路径"><a href="#4、修改idea默认配置路径" class="headerlink" title="4、修改idea默认配置路径"></a>4、修改idea默认配置路径</h2><ul>
+<li><a href="https://intellij-support.jetbrains.com/hc/en-us/articles/207240985-Changing-IDE-default-directories-used-for-config-plugins-and-caches-storage">Changing IDE default directories used for config, plugins, and caches storage</a></li>
+</ul>
+<p>以Windows为例，IDEA默认配置路径基本都是在C盘目录下的：</p>
+<pre><code class="line-numbers language-java">// idea的相关配置、插件目录
+C:&#123;user.home&#125;/AppData/Roaming/JetBrains/IdeaIC2024.2
+// idea的相关系统配置目录：缓存、日志等
+C:&#123;user.home&#125;/AppData/Local/JetBrains/IdeaIC2024.2
+</code></pre>
+<p>修改 <code>IDE_HOME\bin\idea.properties</code> 文件中的注释更改默认值，确保取消注释定义这些属性的行：</p>
+<pre><code class="line-numbers language-properties">idea.config.path=
+idea.system.path=
+idea.plugins.path=
+idea.log.path=
+</code></pre>
+<p>修改对应的配置为：</p>
+<pre><code class="line-numbers language-properties">## 配置的目录
+idea.config.path=D:/cache/idea/trunk-config
+## 配置缓存的目录：index
+idea.system.path=D:/cache/idea/trunk-system 
+## 配置插件的目录，一般是在 config目录里面的
+idea.plugins.path=D:/cache/idea/trunk-config/plugins
+## 配置日志目录
+idea.log.path=D:/cache/idea/trunk-system/trunk-log
+</code></pre>
+<p><strong>如何将默认配置的数据移动到新目录中：</strong></p>
+<ul>
+<li>将<code>C:&#123;user.home&#125;/AppData/Roaming/JetBrains/IdeaIC2024.2</code> 移动到新的目录：<code>idea.config.path</code></li>
+<li><code>C:&#123;user.home&#125;/AppData/Local/JetBrains/IdeaIC2024.2</code> 目录下的数据不需要移动；</li>
+</ul>
+<p>做完之后即可使用原有的目录配置数据</p>
+<h1 id="二、常用插件"><a href="#二、常用插件" class="headerlink" title="二、常用插件"></a>二、常用插件</h1><ul>
+<li>阿里巴巴代码插件：Alibaba Java Coding Guidelines、Alibaba Cloud Toolkit</li>
+<li>背景图片插件：Background Image Plus</li>
+<li>格式化xml：Eclipse Code Fromatter</li>
+<li>Mybtis插件：Free Mybatis Plugin、Mybatis plugin、Mybatis xml validator、MyBatisCodeHelperPro</li>
+<li>Lombok</li>
+<li>主题插件：Material Theme UI、Atom Material Icons</li>
+<li>代码扫描插件：SonarLint</li>
+<li>CodeGlance：可以显示代码的缩略图</li>
+<li>GsonFormat：可以将一个json字符串转成对象</li>
+<li>Key Promoter X</li>
+<li>Maven Helper</li>
+<li>RestfulToolkit</li>
+<li>RestfulTool：可以根据 URL 直接跳转到对应的方法，也可以通过 controller 复制出来对应的 url</li>
+<li>Statistic</li>
+<li>VisualVM Launcher</li>
+<li>ASM</li>
+<li>mybatisX</li>
+<li>Rainbow Brackets ：括号插件</li>
+<li>GitToolBox：Git工具箱(增强)</li>
+<li>Better Highlights：代码认知复杂度</li>
+<li>Arthas</li>
+<li>CheckStyle-IDEA</li>
+<li>JRebel and XRebel</li>
+<li>Continue 是一个适配 IntelliJ IDEA 的开源 AI 助手插件，旨在通过自然语言与代码的交互来提升开发效率。与 CodeGPT、GitHub Copilot 等类似，它基于大语言模型（如 OpenAI 、DeepSeek 或其他模型），为开发者提供实时代码生成、问题解决、单元测试生成等功能。</li>
+<li>CodeGPT 是一款人工智能代码助手，是 GitHub Copilot、AI Assistant、Codiumate 和其他 JetBrains 插件的强大替代品，支持集成市面上常见的大模型</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -425,14 +442,16 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
             return theUnsafe;
         &#125;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="1-2、如何使用"><a href="#1-2、如何使用" class="headerlink" title="1.2、如何使用"></a>1.2、如何使用</h2><h3 id="1-2-1、方式一：设置包路径"><a href="#1-2-1、方式一：设置包路径" class="headerlink" title="1.2.1、方式一：设置包路径"></a>1.2.1、方式一：设置包路径</h3><p>从getUnsafe方法的使用限制条件出发，通过Java命令行命令<code>-Xbootclasspath/a</code>把调用Unsafe相关方法的类A所在jar包路径追加到默认的bootstrap路径中，使得A被引导类加载器加载，从而通过Unsafe.getUnsafe方法安全的获取Unsafe实例：<code>java -Xbootclasspath/a: $&#123;path&#125;   // 其中path为调用Unsafe相关方法的类所在jar包路径</code></p>
 <h3 id="1-2-2、方式二：反射"><a href="#1-2-2、方式二：反射" class="headerlink" title="1.2.2、方式二：反射"></a>1.2.2、方式二：反射</h3><p>通过反射获取单例对象theUnsafe</p>
 <pre><code class="line-numbers language-java">public static void main(String args[]) throws Throwable &#123;
     Field f = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);
     f.setAccessible(true);
     Unsafe unsafe = (Unsafe) f.get(null);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p><strong>注意：</strong>Unsafe在JDK11无法直接使用：sun.misc.Unsafe，需要在 源码包中新建文件： module-info.java，该文件内容如下：</p>
 <pre><code class="line-numbers language-java">module unsafe&#123;
     requires jdk.unsupported;
@@ -446,7 +465,8 @@ idea.log.path=D:/cache/idea/trunk-system/trunk-log</code></pre>
 │   │   │   │       └── fish
 │   │   │   │           └── example
 │   │   │   │               ├── ExampleApplication.java
-│   │   │   └── module-info.java</code></pre>
+│   │   │   └── module-info.java
+</code></pre>
 <h1 id="2、功能介绍"><a href="#2、功能介绍" class="headerlink" title="2、功能介绍"></a>2、功能介绍</h1><p><img src="/images/Unsafe-%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.png"></p>
 <p>Unsafe提供的API大致可分为内存操作、CAS、Class相关、对象操作、线程调度、系统信息获取、内存屏障、数组操作等几类</p>
 <h2 id="2-1、内存操作"><a href="#2-1、内存操作" class="headerlink" title="2.1、内存操作"></a>2.1、内存操作</h2><p>这部分主要包含堆外内存的分配、拷贝、释放、给定地址值操作等方法。</p>
@@ -467,7 +487,8 @@ public native void putObject(Object o, long offset, Object x);
 //获取给定地址的byte类型的值（当且仅当该内存地址为allocateMemory分配时，此方法结果为确定的）
 public native byte getByte(long address);
 //为给定地址设置byte类型的值（当且仅当该内存地址为allocateMemory分配时，此方法结果才是确定的）
-public native void putByte(long address, byte x);</code></pre>
+public native void putByte(long address, byte x);
+</code></pre>
 <p>通常，我们在Java中创建的对象都处于堆内内存（heap）中，堆内内存是由JVM所管控的Java进程内存，并且它们遵循JVM的内存管理机制，JVM会采用垃圾回收机制统一管理堆内存。与之相对的是堆外内存，存在于JVM管控之外的内存区域，Java中对堆外内存的操作，依赖于Unsafe提供的操作堆外内存的native方法</p>
 <p><strong>使用堆外内存的原因：</strong></p>
 <ul>
@@ -503,7 +524,8 @@ public native void putByte(long address, byte x);</code></pre>
     // 跟踪DirectByteBuffer对象的垃圾回收，以实现堆外内存的释放；
     cleaner = Cleaner.create(this, new Deallocator(base, size, cap));
     att = null;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p><strong>那么如何通过构建垃圾回收追踪对象Cleaner实现堆外内存释放呢？</strong></p>
 <p>Cleaner继承自Java四大引用类型之一的虚引用PhantomReference（众所周知，无法通过虚引用获取与之关联的对象实例，且当对象仅被虚引用引用时，在任何发生GC的时候，其均可被回收），通常PhantomReference与引用队列ReferenceQueue结合使用，可以实现虚引用关联对象被垃圾回收时能够进行系统通知、资源清理等功能。如下图所示，当某个被Cleaner引用的对象将被回收时，JVM垃圾收集器会将此对象的引用放入到对象引用中的pending链表中，等待Reference-Handler进行相关处理。其中，Reference-Handler为一个拥有最高优先级的守护线程，会循环不断的处理pending链表中的对象引用，执行Cleaner的clean方法进行相关清理工作</p>
 <p><img src="/images/%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98GC-Cleaner%E8%BF%87%E7%A8%8B.png"></p>
@@ -516,7 +538,8 @@ public native void putByte(long address, byte x);</code></pre>
     buffer = null;
     System.gc();
     Thread.sleep(500);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>回收过程：</p>
 <p><img src="/images/DirectByteBuffer-Cleaner%E6%B5%81%E7%A8%8B.png"></p>
 <h2 id="2-2、CAS相关"><a href="#2-2、CAS相关" class="headerlink" title="2.2、CAS相关"></a>2.2、CAS相关</h2><pre><code class="line-numbers language-java">/**
@@ -529,8 +552,9 @@ public native void putByte(long address, byte x);</code></pre>
 public final native boolean compareAndSwapObject(Object o, long offset,  Object expected, Object update);
 
 public final native boolean compareAndSwapInt(Object o, long offset, int expected,int update);
-
-public final native boolean compareAndSwapLong(Object o, long offset, long expected, long update);</code></pre>
+  
+public final native boolean compareAndSwapLong(Object o, long offset, long expected, long update);
+</code></pre>
 <p>关于CAS，参考<a href="../Java%E5%9F%BA%E7%A1%80/Java%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B.md#2CAS">CAS</a></p>
 <p>CAS在java.util.concurrent.atomic相关类、Java AQS、CurrentHashMap等实现上有非常广泛的应用。比如，AtomicInteger的实现中，静态字段valueOffset即为字段value的内存偏移地址，valueOffset的值在AtomicInteger初始化时，在静态代码块中通过Unsafe的objectFieldOffset方法获取。在AtomicInteger中提供的线程安全方法中，通过字段valueOffset的值可以定位到AtomicInteger对象中value的内存地址，从而可以根据CAS实现对value字段的原子操作</p>
 <h2 id="2-3、线程调度"><a href="#2-3、线程调度" class="headerlink" title="2.3、线程调度"></a>2.3、线程调度</h2><p>包括线程挂起、恢复、锁机制等方法</p>
@@ -546,7 +570,8 @@ public native void monitorEnter(Object o);
 public native void monitorExit(Object o);
 //尝试获取对象锁
 @Deprecated
-public native boolean tryMonitorEnter(Object o);</code></pre>
+public native boolean tryMonitorEnter(Object o);
+</code></pre>
 <p>方法park、unpark即可实现线程的挂起与恢复，将一个线程进行挂起是通过park方法实现的，调用park方法后，线程将一直阻塞直到超时或者中断等条件出现；unpark可以终止一个挂起的线程，使其恢复正常；</p>
 <p><strong>典型应用：</strong>Java锁和同步器框架的核心类AbstractQueuedSynchronizer，就是通过调用LockSupport.park()和LockSupport.unpark()实现线程的阻塞和唤醒的，而LockSupport的park、unpark方法实际是调用Unsafe的park、unpark方式来实现；</p>
 <h2 id="2-4、Class相关"><a href="#2-4、Class相关" class="headerlink" title="2.4、Class相关"></a>2.4、Class相关</h2><p>此部分主要提供Class和它的静态字段的操作相关方法，包含静态字段内存定位、定义类、定义匿名类、检验&amp;确保初始化等。</p>
@@ -561,7 +586,8 @@ public native void ensureClassInitialized(Class&lt;?&gt; c);
 //定义一个类，此方法会跳过JVM的所有安全检查，默认情况下，ClassLoader（类加载器）和ProtectionDomain（保护域）实例来源于调用者
 public native Class&lt;?&gt; defineClass(String name, byte[] b, int off, int len, ClassLoader loader, ProtectionDomain protectionDomain);
 //定义一个匿名类
-public native Class&lt;?&gt; defineAnonymousClass(Class&lt;?&gt; hostClass, byte[] data, Object[] cpPatches);</code></pre>
+public native Class&lt;?&gt; defineAnonymousClass(Class&lt;?&gt; hostClass, byte[] data, Object[] cpPatches);
+</code></pre>
 <p><strong>典型应用</strong></p>
 <p>从Java 8开始，JDK使用<code>invokedynamic</code>及<code>VM Anonymous Class</code>结合来实现Java语言层面上的<a href="../Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md#8.3Lambda%E5%8E%9F%E7%90%86">Lambda表达式</a></p>
 <ul>
@@ -574,7 +600,8 @@ public native Class&lt;?&gt; defineAnonymousClass(Class&lt;?&gt; hostClass, byte
         Consumer&lt;String&gt; consumer = s -&gt; System.out.println(s);
         consumer.accept(&quot;lambda&quot;);
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>上述反编译字节码：</p>
 <pre><code class="line-numbers language-java">SourceFile: &quot;Test.java&quot;
 InnerClasses:
@@ -584,7 +611,8 @@ BootstrapMethods:
     Method arguments:
       #33 (Ljava/lang/Object;)V
       #34 REF_invokeStatic com/blue/fish/example/bytecode/Test.lambda$main$0:(Ljava/lang/String;)V
-      #35 (Ljava/lang/String;)V</code></pre>
+      #35 (Ljava/lang/String;)V
+</code></pre>
 <p>可以从中看到main方法的指令实现、invokedynamic指令调用的引导方法BootstrapMethods、及静态方法<code>lambda$main$0</code>（实现了Lambda表达式中字符串打印逻辑）等。在引导方法执行过程中，会通过Unsafe.defineAnonymousClass生成如下实现Consumer接口的匿名类。其中，accept方法通过调用Test类中的静态方法lambda$main$0来实现Lambda表达式中定义的逻辑</p>
 <h2 id="2-5、对象操作"><a href="#2-5、对象操作" class="headerlink" title="2.5、对象操作"></a>2.5、对象操作</h2><p>此部分主要包含对象成员属性相关操作及非常规的对象实例化方式等相关方法</p>
 <pre><code class="line-numbers language-java">//返回对象成员属性在内存地址相对于此对象的内存地址的偏移量
@@ -600,7 +628,8 @@ public native void putObjectVolatile(Object o, long offset, Object x);
 //有序、延迟版本的putObjectVolatile方法，不保证值的改变被其他线程立即看到。只有在field被volatile修饰符修饰时有效
 public native void putOrderedObject(Object o, long offset, Object x);
 //绕过构造方法、初始化代码来创建对象
-public native Object allocateInstance(Class&lt;?&gt; cls) throws InstantiationException;</code></pre>
+public native Object allocateInstance(Class&lt;?&gt; cls) throws InstantiationException;
+</code></pre>
 <p><strong>典型应用：</strong></p>
 <ul>
 <li>常规对象实例化方式：我们通常所用到的创建对象的方式，从本质上来讲，都是通过new机制来实现对象的创建。但是，new机制有个特点就是当类只提供有参的构造函数且无显示声明无参构造函数时，则必须使用有参构造函数进行对象构造，而使用有参构造函数时，必须传递相应个数的参数才能完成对象实例化。</li>
@@ -610,7 +639,8 @@ public native Object allocateInstance(Class&lt;?&gt; cls) throws InstantiationEx
 <pre><code class="line-numbers language-java">//返回数组中第一个元素的偏移地址
 public native int arrayBaseOffset(Class&lt;?&gt; arrayClass);
 //返回数组中一个元素占用的大小
-public native int arrayIndexScale(Class&lt;?&gt; arrayClass);</code></pre>
+public native int arrayIndexScale(Class&lt;?&gt; arrayClass);
+</code></pre>
 <p>典型应用<br>这两个与数据操作相关的方法，在java.util.concurrent.atomic 包下的AtomicIntegerArray（可以实现对Integer数组中每个元素的原子性操作）中有典型的应用，如下图AtomicIntegerArray源码所示，通过Unsafe的arrayBaseOffset、arrayIndexScale分别获取数组首元素的偏移地址base及单个元素大小因子scale。后续相关原子性操作，均依赖于这两个值进行数组中元素的定位；</p>
 <h2 id="2-7、内存屏障"><a href="#2-7、内存屏障" class="headerlink" title="2.7、内存屏障"></a>2.7、内存屏障</h2><p>在Java 8中引入，用于定义内存屏障（也称内存栅栏，内存栅障，屏障指令等，是一类同步屏障指令，是CPU或编译器在对内存随机访问的操作中的一个同步点，使得此点之前的所有读写操作都执行后才可以开始执行此点之后的操作），避免代码重排序</p>
 <pre><code class="line-numbers language-java">//内存屏障，禁止load操作重排序。屏障前的load操作不能被重排序到屏障后，屏障后的load操作不能被重排序到屏障前
@@ -618,14 +648,16 @@ public native void loadFence();
 //内存屏障，禁止store操作重排序。屏障前的store操作不能被重排序到屏障后，屏障后的store操作不能被重排序到屏障前
 public native void storeFence();
 //内存屏障，禁止load、store操作重排序
-public native void fullFence();</code></pre>
+public native void fullFence();
+</code></pre>
 <p><strong>典型应用：</strong></p>
 <p>在Java 8中引入了一种锁的新机制——StampedLock，它可以看成是读写锁的一个改进版本。StampedLock提供了一种乐观读锁的实现，这种乐观读锁类似于无锁的操作，完全不会阻塞写线程获取写锁，从而缓解读多写少时写线程“饥饿”现象。由于StampedLock提供的乐观读锁不阻塞写线程获取读锁，当线程共享变量从主内存load到线程工作内存时，会存在数据不一致问题，所以当使用StampedLock的乐观读锁时；</p>
 <h2 id="2-8、系统相关"><a href="#2-8、系统相关" class="headerlink" title="2.8、系统相关"></a>2.8、系统相关</h2><p>这部分包含两个获取系统相关信息的方法。</p>
 <pre><code class="line-numbers language-java">//返回系统指针的大小。返回值为4（32位系统）或 8（64位系统）。
 public native int addressSize();  
 //内存页的大小，此值为2的幂次方。
-public native int pageSize();</code></pre>
+public native int pageSize();
+</code></pre>
 <p>为java.nio下的工具类Bits中计算待申请内存所需内存页数量的静态方法，其依赖于Unsafe中pageSize方法获取系统内存页大小实现后续计算逻辑</p>
 <pre><code class="line-numbers language-java">private static int pageSize = -1;
 static int pageSize() &#123;
@@ -635,7 +667,8 @@ static int pageSize() &#123;
 &#125;
 static int pageCount(long size) &#123;
     return (int)(size + (long)pageSize() - 1L) / pageSize();
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
 <li><a href="https://tech.meituan.com/2019/02/14/talk-about-java-magic-class-unsafe.html">Java魔法类Unsafe</a></li>
 </ul>
@@ -666,7 +699,8 @@ static int pageCount(long size) &#123;
 <p><img src="/images/SpringBoot-profile%E7%BC%96%E8%AF%91%E5%90%8E.png"></p>
 <p>但是如果编译后的jar包不包含非当前环境需要的properties文件，可以通过maven的的方式来构建，详细步骤如下：</p>
 <p><strong>（1）application.properties改为如下代码：</strong></p>
-<pre><code>spring.profiles.active=@build.profile.id@</code></pre>
+<pre><code>spring.profiles.active=@build.profile.id@
+</code></pre>
 <p><strong>（2）pom.xml增加如下代码：</strong></p>
 <pre><code class="line-numbers language-xml">&lt;project&gt;
     ...
@@ -707,7 +741,8 @@ static int pageCount(long size) &#123;
             &lt;/properties&gt;
         &lt;/profile&gt;
     &lt;/profiles&gt;
-&lt;/project&gt;</code></pre>
+&lt;/project&gt;
+</code></pre>
 <p><strong>（3）通过如下maven命令执行：</strong></p>
 <p>通过IDEA中执行如下操作：</p>
 <ul>
@@ -755,7 +790,8 @@ static int pageCount(long size) &#123;
     &lt;groupId&gt;io.github.swagger2markup&lt;/groupId&gt;
     &lt;artifactId&gt;swagger2markup&lt;/artifactId&gt;
     &lt;version&gt;1.3.3&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <p>代码如下：</p>
 <pre><code class="line-numbers language-java">public static void main(String[] args) throws Exception &#123;
     // 用于转换的swagger.json可以来自于本地文件，也可以来http 获取
@@ -775,7 +811,8 @@ static int pageCount(long size) &#123;
             .withConfig(config)
             .build()
             .toFolder(outputDir);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>完整属性列表参考官方文档：<a href="https://swagger2markup.github.io/swagger2markup/1.3.3/#_swagger2markup_properties">3.2.5. Swagger2Markup properties</a></p>
 <h3 id="1-2、swagger2markup-插件生成"><a href="#1-2、swagger2markup-插件生成" class="headerlink" title="1.2、swagger2markup 插件生成"></a>1.2、swagger2markup 插件生成</h3><p>pom.xml 添加插件如下:</p>
 <pre><code class="line-numbers language-xml">&lt;plugin&gt;
@@ -810,7 +847,8 @@ static int pageCount(long size) &#123;
             &lt;/goals&gt;
         &lt;/execution&gt;
     &lt;/executions&gt;
-&lt;/plugin&gt;</code></pre>
+&lt;/plugin&gt;
+</code></pre>
 <p>生成的时间，修改此处即可：<code>&lt;phase&gt;package&lt;/phase&gt;</code></p>
 <h3 id="1-3、生成的目录如下："><a href="#1-3、生成的目录如下：" class="headerlink" title="1.3、生成的目录如下："></a>1.3、生成的目录如下：</h3><p><img src="/images/AsciiDOC-%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95.png"></p>
 <h2 id="2、ASCIIDOC转PDF"><a href="#2、ASCIIDOC转PDF" class="headerlink" title="2、ASCIIDOC转PDF"></a>2、ASCIIDOC转PDF</h2><p>采用 <a href="https://docs.asciidoctor.org/maven-tools/latest/">asciidoctor-maven-plugin</a> 插件的方式来转化Ascii文档。</p>
@@ -820,7 +858,8 @@ static int pageCount(long size) &#123;
 <h3 id="2-2、创建index-adoc"><a href="#2-2、创建index-adoc" class="headerlink" title="2.2、创建index.adoc"></a>2.2、创建index.adoc</h3><pre><code class="line-numbers language-adoc">include::asciidoc/generated/overview.adoc[]
 include::asciidoc/generated/paths.adoc[]
 include::asciidoc/generated/security.adoc[]
-include::asciidoc/generated/definitions.adoc[]</code></pre>
+include::asciidoc/generated/definitions.adoc[]
+</code></pre>
 <p>此文件主要用于指引插件访问asciidoc文档</p>
 <h3 id="2-3、插件配置"><a href="#2-3、插件配置" class="headerlink" title="2.3、插件配置"></a>2.3、插件配置</h3><pre><code class="line-numbers language-xml">&lt;plugin&gt;
     &lt;groupId&gt;org.asciidoctor&lt;/groupId&gt;
@@ -904,7 +943,8 @@ include::asciidoc/generated/definitions.adoc[]</code></pre>
             &lt;/configuration&gt;
         &lt;/execution&gt;
     &lt;/executions&gt;
-&lt;/plugin&gt;</code></pre>
+&lt;/plugin&gt;
+</code></pre>
 <p>生成的时间，修改此处即可：<code>&lt;phase&gt;package&lt;/phase&gt;</code></p>
 <h2 id="3、代码目录"><a href="#3、代码目录" class="headerlink" title="3、代码目录"></a>3、代码目录</h2><p>详细代码可以参考：<a href="https://github.com/chenlanqing/springboot-api-doc/tree/main/swagger-document">swagger-document</a></p>
 ]]></content>
@@ -974,12 +1014,14 @@ include::asciidoc/generated/definitions.adoc[]</code></pre>
     &lt;groupId&gt;com.fasterxml.uuid&lt;/groupId&gt;
     &lt;artifactId&gt;java-uuid-generator&lt;/artifactId&gt;
     &lt;version&gt;3.1.4&lt;/version&gt;
-&lt;/dependency&gt;     </code></pre>
+&lt;/dependency&gt;     
+</code></pre>
 <p>实现如下：</p>
 <pre><code class="line-numbers language-java">public static String generatorUUID()&#123;
     TimeBasedGenerator timeBasedGenerator = Generators.timeBasedGenerator(EthernetAddress.fromInterface());
     return timeBasedGenerator.generate().toString();
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="4、Redis生成ID"><a href="#4、Redis生成ID" class="headerlink" title="4、Redis生成ID"></a>4、Redis生成ID</h2><p>当使用数据库来生成ID性能不够要求的时候；可以尝试使用Redis来生成。主要依赖于Redis是单线程的；所以可以用于生成全局唯一ID。（使用Redis的原子操作incr 和 incrby 来实现）比较适合使用Redis来生成每天从0开始的流水号；</p>
 <ul>
 <li><p><strong>4.1.优点：</strong></p>
@@ -1023,7 +1065,8 @@ include::asciidoc/generated/definitions.adoc[]</code></pre>
 </ul>
 <h2 id="6、MongoDB的ObjectId"><a href="#6、MongoDB的ObjectId" class="headerlink" title="6、MongoDB的ObjectId"></a>6、MongoDB的ObjectId</h2><p>ObjectId使用12字节的存储空间；其生成方式如下：</p>
 <pre><code>|0|1|2|3|4|5|6|7|8|9|10|11|
-|时间戳|机器ID|PID|计数器 |</code></pre>
+|时间戳|机器ID|PID|计数器 |
+</code></pre>
 <p>前四个字节时间戳是从标准纪元开始的时间戳；单位为秒；有如下特性：</p>
 <ul>
 <li>时间戳与后边5个字节一块；保证秒级别的唯一性;</li>
@@ -1072,7 +1115,8 @@ include::asciidoc/generated/definitions.adoc[]</code></pre>
 
     // Allocate bits for UID
     return bitsAllocator.allocate(currentSecond - epochSeconds, workerId, sequence);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="8-3、CachedUidGenerator"><a href="#8-3、CachedUidGenerator" class="headerlink" title="8.3、CachedUidGenerator"></a>8.3、CachedUidGenerator</h3><p>在实现上, UidGenerator通过借用未来时间来解决sequence天然存在的并发限制; 采用RingBuffer来缓存已生成的UID, 并行化UID的生产和消费, 同时对CacheLine补齐，避免了由RingBuffer带来的硬件级「伪共享」问题。最终单机QPS可达600万；</p>
 <p>RingBuffer环形数组，数组每个元素成为一个slot。RingBuffer容量，默认为Snowflake算法中sequence最大值，且为2^N。可通过boostPower配置进行扩容，以提高RingBuffer 读写吞吐量。</p>
 <p>Tail指针、Cursor指针用于环形数组上读写slot：</p>
@@ -1127,16 +1171,19 @@ include::asciidoc/generated/definitions.adoc[]</code></pre>
     &lt;groupId&gt;com.xiaoju.uemc.tinyid&lt;/groupId&gt;
     &lt;artifactId&gt;tinyid-client&lt;/artifactId&gt;
     &lt;version&gt;$&#123;tinyid.version&#125;&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <p>然后在你的classpath路径下创建配置文件<code>tinyid_client.properties</code>，内容如下，这两个参数就是<code>IdGeneratorFactoryClient.java</code>中tinyid服务端请求地址<code>http://&#123;0&#125;/tinyid/id/nextSegmentIdSimple?token=&#123;1&#125;&amp;bizType=</code>的第一个和第二个参数：</p>
 <pre><code>tinyid.server=localhost:9999
-tinyid.token=0f673adf80504e2eaa552f5d791b644c</code></pre>
+tinyid.token=0f673adf80504e2eaa552f5d791b644c
+</code></pre>
 <p><code>tinyid.server</code>还支持多个地址配置，多个地址之间以英文逗号隔开，例如：<code>tinyid.server=host1:9999,tinyid.server=host2:9999</code>；</p>
 <p>通过调用tinyid封装的API获取分布式ID，实例代码如下，test就是bizType的值：</p>
 <pre><code class="line-numbers language-java">// 单个分布式ID获取
 Long id = TinyId.nextId(&quot;test&quot;);
 // 多个分布式ID批量获取
-List&lt;Long&gt; ids = TinyId.nextId(&quot;test&quot;, 10);</code></pre>
+List&lt;Long&gt; ids = TinyId.nextId(&quot;test&quot;, 10);
+</code></pre>
 <p>通过配置可知，<code>tinyid-client</code>本质上还是依赖<code>tinyid-server</code>，只不过它封装了对<code>tinyid-server</code>的HTTP请求，然后暴露最简单的API给用户使用而已。它对<code>tinyid-server</code>的HTTP请求封装在<code>TinyIdHttpUtils.java</code>中，依赖JDK原生的<code>HttpURLConnection</code></p>
 <h3 id="9-2、原理"><a href="#9-2、原理" class="headerlink" title="9.2、原理"></a>9.2、原理</h3><p>Tinyid的原理非常简单，通过数据库表中的数据基本是就能猜出个八九不离十，就是经典的segment模式；以同一个bizType为例，每个<code>tinyid-server</code>会分配到不同的segment，例如第一个<code>tinyid-server</code>分配到<code>(1000, 2000]</code>，第二个<code>tinyid-server</code>分配到<code>(2000, 3000]</code>，第3个<code>tinyid-server</code>分配到<code>(3000, 4000]</code>：</p>
 <p><img src="/images/TinyId%E5%8E%9F%E7%90%86%E5%9B%BE.png"></p>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -419,7 +419,8 @@
     &lt;groupId&gt;io.github.swagger2markup&lt;/groupId&gt;
     &lt;artifactId&gt;swagger2markup&lt;/artifactId&gt;
     &lt;version&gt;1.3.3&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <p>代码如下：</p>
 <pre><code class="line-numbers language-java">public static void main(String[] args) throws Exception &#123;
     // 用于转换的swagger.json可以来自于本地文件，也可以来http 获取
@@ -439,7 +440,8 @@
             .withConfig(config)
             .build()
             .toFolder(outputDir);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>完整属性列表参考官方文档：<a target="_blank" rel="noopener" href="https://swagger2markup.github.io/swagger2markup/1.3.3/#_swagger2markup_properties">3.2.5. Swagger2Markup properties</a></p>
 <h3 id="1-2、swagger2markup-插件生成"><a href="#1-2、swagger2markup-插件生成" class="headerlink" title="1.2、swagger2markup 插件生成"></a>1.2、swagger2markup 插件生成</h3><p>pom.xml 添加插件如下:</p>
 <pre><code class="line-numbers language-xml">&lt;plugin&gt;
@@ -474,7 +476,8 @@
             &lt;/goals&gt;
         &lt;/execution&gt;
     &lt;/executions&gt;
-&lt;/plugin&gt;</code></pre>
+&lt;/plugin&gt;
+</code></pre>
 <p>生成的时间，修改此处即可：<code>&lt;phase&gt;package&lt;/phase&gt;</code></p>
 <h3 id="1-3、生成的目录如下："><a href="#1-3、生成的目录如下：" class="headerlink" title="1.3、生成的目录如下："></a>1.3、生成的目录如下：</h3><p><img src="/images/AsciiDOC-%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95.png"></p>
 <h2 id="2、ASCIIDOC转PDF"><a href="#2、ASCIIDOC转PDF" class="headerlink" title="2、ASCIIDOC转PDF"></a>2、ASCIIDOC转PDF</h2><p>采用 <a target="_blank" rel="noopener" href="https://docs.asciidoctor.org/maven-tools/latest/">asciidoctor-maven-plugin</a> 插件的方式来转化Ascii文档。</p>
@@ -484,7 +487,8 @@
 <h3 id="2-2、创建index-adoc"><a href="#2-2、创建index-adoc" class="headerlink" title="2.2、创建index.adoc"></a>2.2、创建index.adoc</h3><pre><code class="line-numbers language-adoc">include::asciidoc/generated/overview.adoc[]
 include::asciidoc/generated/paths.adoc[]
 include::asciidoc/generated/security.adoc[]
-include::asciidoc/generated/definitions.adoc[]</code></pre>
+include::asciidoc/generated/definitions.adoc[]
+</code></pre>
 <p>此文件主要用于指引插件访问asciidoc文档</p>
 <h3 id="2-3、插件配置"><a href="#2-3、插件配置" class="headerlink" title="2.3、插件配置"></a>2.3、插件配置</h3><pre><code class="line-numbers language-xml">&lt;plugin&gt;
     &lt;groupId&gt;org.asciidoctor&lt;/groupId&gt;
@@ -568,7 +572,8 @@ include::asciidoc/generated/definitions.adoc[]</code></pre>
             &lt;/configuration&gt;
         &lt;/execution&gt;
     &lt;/executions&gt;
-&lt;/plugin&gt;</code></pre>
+&lt;/plugin&gt;
+</code></pre>
 <p>生成的时间，修改此处即可：<code>&lt;phase&gt;package&lt;/phase&gt;</code></p>
 <h2 id="3、代码目录"><a href="#3、代码目录" class="headerlink" title="3、代码目录"></a>3、代码目录</h2><p>详细代码可以参考：<a target="_blank" rel="noopener" href="https://github.com/chenlanqing/springboot-api-doc/tree/main/swagger-document">swagger-document</a></p>
 

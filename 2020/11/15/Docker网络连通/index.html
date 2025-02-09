@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -423,14 +423,17 @@
 </tbody></table>
 <p>当前 Mac 可以ping通 虚拟机，虚拟机可以ping同虚拟机中的Docker网络，但是Mac无法ping同虚拟机中的Docker</p>
 <p>那么可以通过添加路由表到Mac中：</p>
-<pre><code>sudo route -n add -net 172.19.0.0 -netmask 255.255.255.0 192.168.31.221</code></pre>
+<pre><code>sudo route -n add -net 172.19.0.0 -netmask 255.255.255.0 192.168.31.221
+</code></pre>
 <p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
 <p>那么路由表信息如下：（查看路由表： <code>netstat -nr</code>）</p>
 <pre><code>Internet:
 Destination        Gateway            Flags        Refs      Use   Netif Expire
-172.19/24          192.168.31.221     UGSc            0        3     en0</code></pre>
+172.19/24          192.168.31.221     UGSc            0        3     en0
+</code></pre>
 <p>如果需要删除路由表，执行如下命令：</p>
-<pre><code>sudo route delete 172.19/24</code></pre>
+<pre><code>sudo route delete 172.19/24
+</code></pre>
 <h2 id="2、Windows连接到虚拟机的docker网络"><a href="#2、Windows连接到虚拟机的docker网络" class="headerlink" title="2、Windows连接到虚拟机的docker网络"></a>2、Windows连接到虚拟机的docker网络</h2><p>假设有Windows、虚拟机、Docker中的IP地址如下：</p>
 <table>
 <thead>
@@ -453,10 +456,12 @@ Destination        Gateway            Flags        Refs      Use   Netif Expire
 </tr>
 </tbody></table>
 <p>在windows中添加路由地址：</p>
-<pre><code>ROUTE -p add 172.19.0.0 mask 255.255.255.0 192.168.31.221</code></pre>
+<pre><code>ROUTE -p add 172.19.0.0 mask 255.255.255.0 192.168.31.221
+</code></pre>
 <p>添加网络路由，172.19.0.0 mask 255.255.255.0 都由 192.168.31.221 来帮忙转发</p>
 <p>删除路由：</p>
-<pre><code>route delete 172.19.0.0 mask 255.255.255.0 192.168.31.221</code></pre>
+<pre><code>route delete 172.19.0.0 mask 255.255.255.0 192.168.31.221
+</code></pre>
 <p><strong>注意点：需要关闭虚拟机的防火墙</strong></p>
 
             </div>

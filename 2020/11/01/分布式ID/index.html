@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -455,12 +455,14 @@
     &lt;groupId&gt;com.fasterxml.uuid&lt;/groupId&gt;
     &lt;artifactId&gt;java-uuid-generator&lt;/artifactId&gt;
     &lt;version&gt;3.1.4&lt;/version&gt;
-&lt;/dependency&gt;     </code></pre>
+&lt;/dependency&gt;     
+</code></pre>
 <p>实现如下：</p>
 <pre><code class="line-numbers language-java">public static String generatorUUID()&#123;
     TimeBasedGenerator timeBasedGenerator = Generators.timeBasedGenerator(EthernetAddress.fromInterface());
     return timeBasedGenerator.generate().toString();
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h2 id="4、Redis生成ID"><a href="#4、Redis生成ID" class="headerlink" title="4、Redis生成ID"></a>4、Redis生成ID</h2><p>当使用数据库来生成ID性能不够要求的时候；可以尝试使用Redis来生成。主要依赖于Redis是单线程的；所以可以用于生成全局唯一ID。（使用Redis的原子操作incr 和 incrby 来实现）比较适合使用Redis来生成每天从0开始的流水号；</p>
 <ul>
 <li><p><strong>4.1.优点：</strong></p>
@@ -504,7 +506,8 @@
 </ul>
 <h2 id="6、MongoDB的ObjectId"><a href="#6、MongoDB的ObjectId" class="headerlink" title="6、MongoDB的ObjectId"></a>6、MongoDB的ObjectId</h2><p>ObjectId使用12字节的存储空间；其生成方式如下：</p>
 <pre><code>|0|1|2|3|4|5|6|7|8|9|10|11|
-|时间戳|机器ID|PID|计数器 |</code></pre>
+|时间戳|机器ID|PID|计数器 |
+</code></pre>
 <p>前四个字节时间戳是从标准纪元开始的时间戳；单位为秒；有如下特性：</p>
 <ul>
 <li>时间戳与后边5个字节一块；保证秒级别的唯一性;</li>
@@ -553,7 +556,8 @@
 
     // Allocate bits for UID
     return bitsAllocator.allocate(currentSecond - epochSeconds, workerId, sequence);
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="8-3、CachedUidGenerator"><a href="#8-3、CachedUidGenerator" class="headerlink" title="8.3、CachedUidGenerator"></a>8.3、CachedUidGenerator</h3><p>在实现上, UidGenerator通过借用未来时间来解决sequence天然存在的并发限制; 采用RingBuffer来缓存已生成的UID, 并行化UID的生产和消费, 同时对CacheLine补齐，避免了由RingBuffer带来的硬件级「伪共享」问题。最终单机QPS可达600万；</p>
 <p>RingBuffer环形数组，数组每个元素成为一个slot。RingBuffer容量，默认为Snowflake算法中sequence最大值，且为2^N。可通过boostPower配置进行扩容，以提高RingBuffer 读写吞吐量。</p>
 <p>Tail指针、Cursor指针用于环形数组上读写slot：</p>
@@ -608,16 +612,19 @@
     &lt;groupId&gt;com.xiaoju.uemc.tinyid&lt;/groupId&gt;
     &lt;artifactId&gt;tinyid-client&lt;/artifactId&gt;
     &lt;version&gt;$&#123;tinyid.version&#125;&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <p>然后在你的classpath路径下创建配置文件<code>tinyid_client.properties</code>，内容如下，这两个参数就是<code>IdGeneratorFactoryClient.java</code>中tinyid服务端请求地址<code>http://&#123;0&#125;/tinyid/id/nextSegmentIdSimple?token=&#123;1&#125;&amp;bizType=</code>的第一个和第二个参数：</p>
 <pre><code>tinyid.server=localhost:9999
-tinyid.token=0f673adf80504e2eaa552f5d791b644c</code></pre>
+tinyid.token=0f673adf80504e2eaa552f5d791b644c
+</code></pre>
 <p><code>tinyid.server</code>还支持多个地址配置，多个地址之间以英文逗号隔开，例如：<code>tinyid.server=host1:9999,tinyid.server=host2:9999</code>；</p>
 <p>通过调用tinyid封装的API获取分布式ID，实例代码如下，test就是bizType的值：</p>
 <pre><code class="line-numbers language-java">// 单个分布式ID获取
 Long id = TinyId.nextId(&quot;test&quot;);
 // 多个分布式ID批量获取
-List&lt;Long&gt; ids = TinyId.nextId(&quot;test&quot;, 10);</code></pre>
+List&lt;Long&gt; ids = TinyId.nextId(&quot;test&quot;, 10);
+</code></pre>
 <p>通过配置可知，<code>tinyid-client</code>本质上还是依赖<code>tinyid-server</code>，只不过它封装了对<code>tinyid-server</code>的HTTP请求，然后暴露最简单的API给用户使用而已。它对<code>tinyid-server</code>的HTTP请求封装在<code>TinyIdHttpUtils.java</code>中，依赖JDK原生的<code>HttpURLConnection</code></p>
 <h3 id="9-2、原理"><a href="#9-2、原理" class="headerlink" title="9.2、原理"></a>9.2、原理</h3><p>Tinyid的原理非常简单，通过数据库表中的数据基本是就能猜出个八九不离十，就是经典的segment模式；以同一个bizType为例，每个<code>tinyid-server</code>会分配到不同的segment，例如第一个<code>tinyid-server</code>分配到<code>(1000, 2000]</code>，第二个<code>tinyid-server</code>分配到<code>(2000, 3000]</code>，第3个<code>tinyid-server</code>分配到<code>(3000, 4000]</code>：</p>
 <p><img src="/images/TinyId%E5%8E%9F%E7%90%86%E5%9B%BE.png"></p>

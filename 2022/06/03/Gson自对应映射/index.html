@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -407,7 +407,8 @@
 年假：□
 正常：V
 早退：#
-加班：☆</code></pre>
+加班：☆
+</code></pre>
 <p>原始数据格式：</p>
 <pre><code class="line-numbers language-json">&#123;
   &quot;01&quot;: &quot;3&quot;,
@@ -433,7 +434,8 @@
   &quot;29&quot;: &quot;3&quot;,
   &quot;30&quot;: &quot;1&quot;,
   &quot;31&quot;: &quot;7&quot;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>对应的实体类：</p>
 <pre><code class="line-numbers language-java">public class CheckReport &#123;
     private String day_1;
@@ -467,7 +469,8 @@
     private String day_29;
     private String day_30;
     private String day_31;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>我们需要将json格式转换如下数据格式：</p>
 <pre><code class="line-numbers language-json">&#123;
   &quot;day_1&quot;: &quot;正常出勤&quot;,
@@ -493,14 +496,16 @@
   &quot;day_29&quot;: &quot;正常出勤&quot;,
   &quot;day_30&quot;: &quot;调休&quot;,
   &quot;day_31&quot;: &quot;加班&quot;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>那么传统的方式就无法实现了</p>
 <h2 id="2、实现步骤"><a href="#2、实现步骤" class="headerlink" title="2、实现步骤"></a>2、实现步骤</h2><h3 id="2-1、引入依赖"><a href="#2-1、引入依赖" class="headerlink" title="2.1、引入依赖"></a>2.1、引入依赖</h3><p>这里使用Gson的依赖：</p>
 <pre><code class="line-numbers language-xml">&lt;dependency&gt;
     &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;
     &lt;artifactId&gt;gson&lt;/artifactId&gt;
     &lt;version&gt;$&#123;latest.version&#125;&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <h3 id="2-2、自定义TypeAdapter"><a href="#2-2、自定义TypeAdapter" class="headerlink" title="2.2、自定义TypeAdapter"></a>2.2、自定义TypeAdapter</h3><pre><code class="line-numbers language-java">public class CheckResultTypeAdapter extends TypeAdapter&lt;CheckReport&gt; &#123;
     // 这个是对象转成json字符串的时候使用的写出的方法
     @Override
@@ -577,7 +582,8 @@
         &#125; catch (Exception e) &#123;
         &#125;
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 <h3 id="2-3、使用"><a href="#2-3、使用" class="headerlink" title="2.3、使用"></a>2.3、使用</h3><pre><code class="line-numbers language-java">public static void main(String[] args) &#123;
     GsonBuilder builder = new GsonBuilder();
     // 通过GsonBuilder将自定义的adapter注册进去
@@ -612,7 +618,8 @@
     final CheckReport report = gson.fromJson(json, CheckReport.class);
     System.out.println(JSON.toJSONString(report));
     System.out.println(gson.toJson(report));
-&#125;</code></pre>
+&#125;
+</code></pre>
 <p>输出结果：</p>
 <pre><code class="line-numbers language-java">// 输出的是正常对象转换成json
 &#123;&quot;day_1&quot;:&quot;正常出勤&quot;,&quot;day_11&quot;:&quot;事假&quot;,&quot;day_12&quot;:&quot;正常出勤&quot;,&quot;day_13&quot;:&quot;正常出勤&quot;,&quot;day_14&quot;:&quot;正常出勤&quot;,&quot;day_15&quot;:&quot;正常出勤&quot;,&quot;day_18&quot;:&quot;正常出勤&quot;,&quot;day_19&quot;:&quot;正常出勤&quot;,&quot;day_2&quot;:&quot;正常出勤&quot;,&quot;day_20&quot;:&quot;正常出勤&quot;,&quot;day_21&quot;:&quot;早退&quot;,&quot;day_22&quot;:&quot;事假&quot;,&quot;day_24&quot;:&quot;事假&quot;,&quot;day_25&quot;:&quot;正常出勤&quot;,&quot;day_26&quot;:&quot;早退&quot;,&quot;day_27&quot;:&quot;早退&quot;,&quot;day_28&quot;:&quot;正常出勤&quot;,&quot;day_29&quot;:&quot;正常出勤&quot;,&quot;day_30&quot;:&quot;调休&quot;,&quot;day_31&quot;:&quot;加班&quot;,&quot;day_6&quot;:&quot;早退&quot;,&quot;day_7&quot;:&quot;正常出勤&quot;,&quot;day_8&quot;:&quot;正常出勤&quot;&#125;
@@ -641,7 +648,8 @@
   &quot;29&quot;: &quot;3&quot;,
   &quot;30&quot;: &quot;1&quot;,
   &quot;31&quot;: &quot;7&quot;
-&#125;</code></pre>
+&#125;
+</code></pre>
 
             </div>
             <hr/>

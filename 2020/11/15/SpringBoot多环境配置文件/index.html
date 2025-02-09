@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -412,7 +412,8 @@
 <p><img src="/images/SpringBoot-profile%E7%BC%96%E8%AF%91%E5%90%8E.png"></p>
 <p>但是如果编译后的jar包不包含非当前环境需要的properties文件，可以通过maven的的方式来构建，详细步骤如下：</p>
 <p><strong>（1）application.properties改为如下代码：</strong></p>
-<pre><code>spring.profiles.active=@build.profile.id@</code></pre>
+<pre><code>spring.profiles.active=@build.profile.id@
+</code></pre>
 <p><strong>（2）pom.xml增加如下代码：</strong></p>
 <pre><code class="line-numbers language-xml">&lt;project&gt;
     ...
@@ -453,7 +454,8 @@
             &lt;/properties&gt;
         &lt;/profile&gt;
     &lt;/profiles&gt;
-&lt;/project&gt;</code></pre>
+&lt;/project&gt;
+</code></pre>
 <p><strong>（3）通过如下maven命令执行：</strong></p>
 <p>通过IDEA中执行如下操作：</p>
 <ul>
