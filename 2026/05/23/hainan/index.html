@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海南岛环岛自驾游攻略 · 2026年6月</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-200: #5DCAA5;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --amber-50: #FAEEDA;
+    --amber-100: #FAC775;
+    --amber-400: #BA7517;
+    --amber-600: #854F0B;
+    --coral-50: #FAECE7;
+    --coral-100: #F5C4B3;
+    --coral-400: #D85A30;
+    --coral-600: #993C1D;
+    --blue-50: #E6F1FB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --gray-50: #F7F6F3;
+    --gray-100: #EEEDEA;
+    --gray-200: #D3D1C7;
+    --gray-600: #5F5E5A;
+    --gray-800: #2C2C2A;
+    --purple-50: #EEEDFE;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+    background: #F5F3EE;
+    color: var(--gray-800);
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--teal-600) 0%, var(--teal-400) 55%, var(--teal-200) 100%);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat .val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .hero-stat .lbl {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+  }
+
+  /* NAV */
+  .nav {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+  }
+  .nav a {
+    padding: 0.9rem 1.4rem;
+    font-size: 14px;
+    color: var(--gray-600);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2.5px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav a:hover { color: var(--teal-600); border-bottom-color: var(--teal-400); }
+  .nav a.active { color: var(--teal-600); border-bottom-color: var(--teal-600); font-weight: 500; }
+
+  /* LAYOUT */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 3rem 0; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .section-title .icon {
+    width: 36px; height: 36px;
+    background: var(--teal-50);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .section-title h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+
+  /* OVERVIEW CARDS */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .overview-card {
+    background: #fff;
+    border: 0.5px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 1.2rem;
+  }
+  .overview-card .oc-label {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-bottom: 4px;
+  }
+  .overview-card .oc-value {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--gray-800);
+  }
+  .overview-card .oc-sub {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-top: 2px;
+  }
+
+  /* BUDGET BARS */
+  .budget-section { background: #fff; border-radius: 16px; padding: 1.5rem; border: 0.5px solid var(--gray-200); }
+  .budget-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .budget-row:last-child { margin-bottom: 0; }
+  .budget-label { font-size: 13px; color: var(--gray-600); min-width: 80px; }
+  .budget-bar-wrap { flex: 1; height: 8px; background: var(--gray-100); border-radius: 4px; }
+  .budget-bar { height: 100%; border-radius: 4px; }
+  .budget-amount { font-size: 13px; font-weight: 500; color: var(--gray-800); min-width: 60px; text-align: right; }
+
+  /* ITINERARY */
+  .day-cards { display: flex; flex-direction: column; gap: 16px; }
+  .day-card {
+    background: #fff;
+    border: 0.5px solid var(--gray-200);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 1rem 1.4rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-num {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--teal-800);
+    background: var(--teal-50);
+  }
+  .day-meta h3 { font-size: 1rem; font-weight: 500; }
+  .day-meta p { font-size: 13px; color: var(--gray-600); }
+  .day-toggle {
+    margin-left: auto;
+    font-size: 20px;
+    color: var(--gray-600);
+    transition: transform 0.25s;
+  }
+  .day-toggle.open { transform: rotate(180deg); }
+  .day-body { padding: 0 1.4rem 1.2rem; display: none; }
+  .day-body.open { display: block; }
+  .day-route {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: var(--gray-50);
+    border-radius: 10px;
+    font-size: 13px;
+  }
+  .route-stop {
+    background: var(--teal-50);
+    color: var(--teal-800);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .route-arrow { color: var(--gray-600); font-size: 12px; }
+  .day-spots { display: flex; flex-direction: column; gap: 8px; }
+  .spot {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .spot-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .spot-icon.sight { background: var(--amber-50); }
+  .spot-icon.food { background: var(--coral-50); }
+  .spot-icon.stay { background: var(--blue-50); }
+  .spot-info h4 { font-size: 14px; font-weight: 500; }
+  .spot-info p { font-size: 13px; color: var(--gray-600); }
+  .spot-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-highlight { background: var(--amber-50); color: var(--amber-600); }
+  .tag-tip { background: var(--teal-50); color: var(--teal-600); }
+  .day-divider { border: none; border-top: 0.5px solid var(--gray-100); margin: 10px 0; }
+
+  /* MAP ROUTE */
+  .map-container {
+    background: #fff;
+    border: 0.5px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+
+  /* CAR RENTAL */
+  .car-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .car-card {
+    background: #fff;
+    border: 0.5px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 1.2rem;
+  }
+  .car-card.recommended { border: 2px solid var(--teal-200); }
+  .car-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .badge-rec { background: var(--teal-50); color: var(--teal-600); }
+  .badge-prem { background: var(--blue-50); color: var(--blue-600); }
+  .badge-eco { background: var(--amber-50); color: var(--amber-600); }
+  .car-name { font-size: 1.05rem; font-weight: 500; margin-bottom: 4px; }
+  .car-price { font-size: 1.4rem; font-weight: 700; color: var(--teal-600); }
+  .car-price span { font-size: 13px; font-weight: 400; color: var(--gray-600); }
+  .car-features { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+  .car-features li { font-size: 13px; color: var(--gray-600); display: flex; align-items: center; gap: 6px; }
+  .car-features li::before { content: '✓'; color: var(--teal-400); font-weight: 700; }
+
+  /* SUPPLIES */
+  .supply-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .supply-card {
+    background: #fff;
+    border: 0.5px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 1.2rem;
+  }
+  .supply-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .supply-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .supply-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .supply-list li { font-size: 13px; color: var(--gray-600); padding-left: 14px; position: relative; }
+  .supply-list li::before { content: '·'; position: absolute; left: 4px; color: var(--gray-600); }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .tip-card {
+    background: #fff;
+    border: 0.5px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 1.2rem;
+    display: flex;
+    gap: 12px;
+  }
+  .tip-icon-wrap {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .tip-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .tip-card p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+  /* WARNING BANNER */
+  .warning-banner {
+    background: #FAEEDA;
+    border: 0.5px solid #FAC775;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .warning-banner .wi { font-size: 18px; }
+  .warning-banner p { font-size: 13px; color: var(--amber-600); line-height: 1.6; }
+  .warning-banner strong { color: var(--amber-600); }
+
+  /* FOOTER */
+  footer {
+    background: var(--teal-800);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2rem;
+    font-size: 13px;
+  }
+  footer strong { color: rgba(255,255,255,0.9); }
+
+  /* ROUTE SVG MAP */
+  .route-map { width: 100%; max-width: 700px; margin: 0 auto; display: block; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">2026 · 6月 自驾攻略</div>
+  <h1>海南岛环岛自驾游</h1>
+  <p>杭州出发 · 逆时针环岛 · 8天全程约1,100公里</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="val">8天</div><div class="lbl">旅行时长</div></div>
+    <div class="hero-stat"><div class="val">2万</div><div class="lbl">预计预算</div></div>
+    <div class="hero-stat"><div class="val">~1100</div><div class="lbl">公里行程</div></div>
+    <div class="hero-stat"><div class="val">5+</div><div class="lbl">核心城市</div></div>
+    <div class="hero-stat"><div class="val">6/20</div><div class="lbl">杭州出发</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="#overview" class="active">总览</a>
+  <a href="#itinerary">行程安排</a>
+  <a href="#route-map">路线地图</a>
+  <a href="#rental">租车推荐</a>
+  <a href="#supplies">物资清单</a>
+  <a href="#tips">实用贴士</a>
+</nav>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="section-title">
+      <div class="icon">🗺</div>
+      <h2>行程总览</h2>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="oc-label">出发日期</div>
+        <div class="oc-value">6月20日（六）</div>
+        <div class="oc-sub">杭州萧山机场出发</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">飞行路线</div>
+        <div class="oc-value">HGH → HAK</div>
+        <div class="oc-sub">杭州 → 海口美兰机场</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">环岛方向</div>
+        <div class="oc-value">逆时针</div>
+        <div class="oc-sub">海口→西线→三亚→东线→海口</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">必去景点</div>
+        <div class="oc-value">儋州 · 三亚 · 文昌 · 博鳌</div>
+        <div class="oc-sub">蜈支洲岛 · 南山观音</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">6月天气</div>
+        <div class="oc-value">28–34°C</div>
+        <div class="oc-sub">高温多雨，防晒防暑为要</div>
+      </div>
+      <div class="overview-card">
+        <div class="oc-label">高速费用</div>
+        <div class="oc-value">全程免费</div>
+        <div class="oc-sub">海南环岛高速不收费</div>
+      </div>
+    </div>
+
+    <!-- BUDGET -->
+    <div class="section-title" style="margin-top:1.5rem">
+      <div class="icon">💰</div>
+      <h2>预算分配（约￥20,000）</h2>
+    </div>
+    <div class="budget-section">
+      <div class="budget-row">
+        <div class="budget-label">机票（往返）</div>
+        <div class="budget-bar-wrap"><div class="budget-bar" style="width:30%; background: var(--teal-400);"></div></div>
+        <div class="budget-amount">约 ¥2,400</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">租车（6天）</div>
+        <div class="budget-bar-wrap"><div class="budget-bar" style="width:18%; background: var(--blue-400);"></div></div>
+        <div class="budget-amount">约 ¥1,500</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">酒店住宿</div>
+        <div class="budget-bar-wrap"><div class="budget-bar" style="width:42%; background: var(--coral-400);"></div></div>
+        <div class="budget-amount">约 ¥5,500</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">景点门票</div>
+        <div class="budget-bar-wrap"><div class="budget-bar" style="width:28%; background: var(--amber-400);"></div></div>
+        <div class="budget-amount">约 ¥2,300</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">餐饮美食</div>
+        <div class="budget-bar-wrap"><div class="budget-bar" style="width:32%; background: var(--teal-200);"></div></div>
+        <div class="budget-amount">约 ¥2,800</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">购物免税</div>
+        <div class="budget-bar-wrap"><div class="budget-bar" style="width:36%; background: var(--purple-400);"></div></div>
+        <div class="budget-amount">约 ¥3,000</div>
+      </div>
+      <div class="budget-row">
+        <div class="budget-label">其他备用</div>
+        <div class="budget-bar-wrap"><div class="budget-bar" style="width:25%; background: var(--gray-400, #888);"></div></div>
+        <div class="budget-amount">约 ¥2,500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary" style="background:#fff; padding: 3rem 0;">
+  <div class="container">
+    <div class="section-title">
+      <div class="icon">📅</div>
+      <h2>详细行程安排（8天7晚）</h2>
+    </div>
+
+    <div class="warning-banner">
+      <span class="wi">⚠️</span>
+      <p><strong>6月注意：</strong>海南6月气温高达32–35°C，紫外线极强，午间12–15时尽量避免户外活动。此外6月雨季开始，台风季来临，出发前关注天气预报，蜈支洲岛出海项目需提前查询是否正常运营。</p>
+    </div>
+
+    <div class="day-cards">
+
+      <!-- Day 1 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D1</div>
+          <div class="day-meta">
+            <h3>6月20日（周六）· 杭州飞往海口 · 海口市区</h3>
+            <p>萧山机场出发 → 抵达海口美兰机场 → 取车 → 骑楼老街</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">杭州</span><span class="route-arrow">✈</span>
+            <span class="route-stop">海口美兰机场</span><span class="route-arrow">→</span>
+            <span class="route-stop">骑楼老街</span><span class="route-arrow">→</span>
+            <span class="route-stop">海口市区住宿</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">✈️</div>
+              <div class="spot-info"><h4>飞行建议</h4><p>建议订上午航班（8–10点），全程约2.5小时，下午可自由活动。抵达后在美兰机场取租车，手续约30分钟。</p></div>
+            </div>
+            <hr class="day-divider">
+            <div class="spot">
+              <div class="spot-icon sight">🏛️</div>
+              <div class="spot-info"><h4>骑楼老街 <span class="spot-tag tag-highlight">必打卡</span></h4><p>感受南洋风情建筑与市井烟火，傍晚最美，约2小时。推荐品尝海南粉、清补凉。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon food">🍜</div>
+              <div class="spot-info"><h4>晚餐推荐：椰子鸡 / 海南粉</h4><p>骑楼老街附近有大量本地特色餐馆，人均50–80元。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon stay">🏨</div>
+              <div class="spot-info"><h4>住宿：海口市区</h4><p>建议住骑楼老街或国贸附近，方便次日驾车西出。参考价：¥350–500/晚</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D2</div>
+          <div class="day-meta">
+            <h3>6月21日（周日）· 海口 → 儋州</h3>
+            <p>西线出发，约180公里，车程约2小时</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">海口</span><span class="route-arrow">→</span>
+            <span class="route-stop">临高角</span><span class="route-arrow">→</span>
+            <span class="route-stop">儋州</span><span class="route-arrow">→</span>
+            <span class="route-stop">棋子湾</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">🌊</div>
+              <div class="spot-info"><h4>临高角灯塔</h4><p>海南西北角历史灯塔，海景壮阔，免费，适合清晨赶路途中停留。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">📜</div>
+              <div class="spot-info"><h4>儋州东坡书院 <span class="spot-tag tag-highlight">必去</span></h4><p>北宋苏东坡被贬儋州所建，古典园林风格，感受千年文化底蕴。门票约¥40，游览约2小时。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🏖️</div>
+              <div class="spot-info"><h4>棋子湾 <span class="spot-tag tag-tip">沙漠+大海</span></h4><p>"沙漠与大海交融"的奇观，棋子湾的彩色鹅卵石为一大特色。傍晚最美，可在此欣赏日落。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon food">🥩</div>
+              <div class="spot-info"><h4>晚餐：儋州烤乳猪 / 和乐蟹</h4><p>儋州特色美食不可错过，人均60–100元。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon stay">🏨</div>
+              <div class="spot-info"><h4>住宿：棋子湾附近度假酒店</h4><p>推荐棋子湾开元度假村或海景客栈，枕着涛声入眠。参考价：¥400–700/晚</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D3</div>
+          <div class="day-meta">
+            <h3>6月22日（周一）· 儋州 → 东方 → 三亚</h3>
+            <p>西线继续南下，约250公里，车程约3小时</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">棋子湾</span><span class="route-arrow">→</span>
+            <span class="route-stop">莺歌海盐场</span><span class="route-arrow">→</span>
+            <span class="route-stop">东方鱼鳞洲</span><span class="route-arrow">→</span>
+            <span class="route-stop">三亚</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">⬜</div>
+              <div class="spot-info"><h4>莺歌海盐场</h4><p>亚洲最大海盐场，白色盐山与蓝天碧海相映，极具视觉冲击力。免费参观，约1小时。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🗼</div>
+              <div class="spot-info"><h4>东方鱼鳞洲灯塔</h4><p>登塔远眺碧波，此处风车群落日极美，建议傍晚前到达。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🌃</div>
+              <div class="spot-info"><h4>到达三亚</h4><p>傍晚抵达三亚，入住酒店后可逛三亚湾步行街、品海鲜大排档。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon stay">🏨</div>
+              <div class="spot-info"><h4>住宿：三亚（建议住2晚）</h4><p>推荐亚龙湾或海棠湾区域，近蜈支洲岛码头。参考价：¥500–900/晚</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D4</div>
+          <div class="day-meta">
+            <h3>6月23日（周二）· 三亚精华游</h3>
+            <p>南山观音 + 天涯海角，全天三亚</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">三亚市区</span><span class="route-arrow">→</span>
+            <span class="route-stop">南山文化旅游区</span><span class="route-arrow">→</span>
+            <span class="route-stop">天涯海角</span><span class="route-arrow">→</span>
+            <span class="route-stop">三亚湾</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">🙏</div>
+              <div class="spot-info"><h4>南山海上观音 <span class="spot-tag tag-highlight">必去</span></h4><p>世界最高海上观音（108米），南山文化旅游区，庄严壮观。建议早上8点开园即入，避开正午烈日。门票约¥150，游览约3小时。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">⚓</div>
+              <div class="spot-info"><h4>天涯海角</h4><p>"天之涯、海之角"，海南最具代表性的景点之一，傍晚光线柔和最适合拍照。门票约¥80，约1.5小时。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon food">🦞</div>
+              <div class="spot-info"><h4>晚餐：三亚大东海海鲜市场</h4><p>选购新鲜海鲜按需加工，龙虾、海胆、濑尿虾等，人均100–200元。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D5</div>
+          <div class="day-meta">
+            <h3>6月24日（周三）· 蜈支洲岛 <span style="color:var(--coral-400)">⭐ 全程亮点</span></h3>
+            <p>全天蜈支洲岛海岛度假</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">三亚住处</span><span class="route-arrow">→</span>
+            <span class="route-stop">后海码头（早船）</span><span class="route-arrow">→</span>
+            <span class="route-stop">蜈支洲岛</span><span class="route-arrow">→</span>
+            <span class="route-stop">返回三亚</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">🏝️</div>
+              <div class="spot-info"><h4>蜈支洲岛 <span class="spot-tag tag-highlight">全程最美</span></h4><p>中国最美海岛之一，海水能见度高，珊瑚礁群发育完整。建议早船（8点前）上岛，避开人流高峰。门票含船票约¥220，全天游玩。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🤿</div>
+              <div class="spot-info"><h4>推荐项目：浮潜 / 潜水</h4><p>岛上水下能见度达20米，珊瑚礁色彩斑斓。浮潜约¥80，体验潜水约¥300–400。6月水温约28°C，极舒适。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🌅</div>
+              <div class="spot-info"><h4>注意事项 <span class="spot-tag tag-tip">重要</span></h4><p>6月须提前查询开放状态（台风影响时会关闭）。岛上饮食较贵（人均100+元），可带些零食。下午最后一班船约17:30，切勿错过。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 6 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D6</div>
+          <div class="day-meta">
+            <h3>6月25日（周四）· 三亚 → 陵水 → 万宁 → 博鳌</h3>
+            <p>东线北上，约230公里，车程约3小时</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">三亚</span><span class="route-arrow">→</span>
+            <span class="route-stop">分界洲岛（可选）</span><span class="route-arrow">→</span>
+            <span class="route-stop">万宁日月湾</span><span class="route-arrow">→</span>
+            <span class="route-stop">博鳌</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">🏄</div>
+              <div class="spot-info"><h4>万宁日月湾</h4><p>中国冲浪圣地，海浪条件极佳。即便不冲浪，海滩漂亮，可游泳戏水。约1.5小时。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🏛️</div>
+              <div class="spot-info"><h4>博鳌亚洲论坛会址 <span class="spot-tag tag-highlight">必去</span></h4><p>著名国际会议举办地，万泉河、南海、龙湾潮三水交汇，水天一色。免费开放部分区域，约2小时。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon food">🐠</div>
+              <div class="spot-info"><h4>晚餐：博鳌海鲜</h4><p>博鳌海鲜非常新鲜，价格也比三亚实惠，推荐当地海鲜排档。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon stay">🏨</div>
+              <div class="spot-info"><h4>住宿：博鳌或琼海</h4><p>博鳌有多家滨海精品酒店，参考价：¥400–700/晚</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 7 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D7</div>
+          <div class="day-meta">
+            <h3>6月26日（周五）· 博鳌 → 文昌 → 海口</h3>
+            <p>东线最后一程，约180公里，车程约2小时</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">博鳌</span><span class="route-arrow">→</span>
+            <span class="route-stop">文昌航天发射中心</span><span class="route-arrow">→</span>
+            <span class="route-stop">东郊椰林</span><span class="route-arrow">→</span>
+            <span class="route-stop">铺前老街</span><span class="route-arrow">→</span>
+            <span class="route-stop">海口</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">🚀</div>
+              <div class="spot-info"><h4>文昌航天科普中心 <span class="spot-tag tag-highlight">必去</span></h4><p>中国新一代运载火箭发射场，科技感满满的航天主题科普体验。门票约¥80，约2小时。如运气好还能观摩发射（需提前查询计划）。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🌴</div>
+              <div class="spot-info"><h4>东郊椰林</h4><p>全国最大的椰子树种植基地，椰林大道绵延数公里。可乘渔船出海捞椰，体验"椰风海韵"。约1.5小时，免费+渔船约¥50。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon sight">🏘️</div>
+              <div class="spot-info"><h4>铺前老街（可选）</h4><p>保存完整的南洋骑楼老街，文艺氛围浓厚，适合拍照打卡。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon stay">🏨</div>
+              <div class="spot-info"><h4>返回海口还车 + 住宿</h4><p>建议傍晚前还车（避免加收费用），入住海口市区，做好次日离岛准备。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 8 -->
+      <div class="day-card">
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-num">D8</div>
+          <div class="day-meta">
+            <h3>6月27日（周六）· 海口 → 杭州返程</h3>
+            <p>离岛免税购物 + 返程</p>
+          </div>
+          <div class="day-toggle">▾</div>
+        </div>
+        <div class="day-body">
+          <div class="day-route">
+            <span class="route-stop">海口市区</span><span class="route-arrow">→</span>
+            <span class="route-stop">免税店提货</span><span class="route-arrow">→</span>
+            <span class="route-stop">海口美兰机场</span><span class="route-arrow">✈</span>
+            <span class="route-stop">杭州萧山</span>
+          </div>
+          <div class="day-spots">
+            <div class="spot">
+              <div class="spot-icon sight">🛍️</div>
+              <div class="spot-info"><h4>离岛免税购物 <span class="spot-tag tag-tip">每人10万免税额度</span></h4><p>海南离岛旅客享每人10万元免税额度。在机场提前24小时下单，提前2小时到机场排队取货。化妆品、酒类、电子产品最划算。</p></div>
+            </div>
+            <div class="spot">
+              <div class="spot-icon food">🥥</div>
+              <div class="spot-info"><h4>最后一餐：海口本地早茶</h4><p>推荐海南早茶文化：虾饺、烧麦、肠粉配椰汁，画上完美句点。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE MAP -->
+<section id="route-map">
+  <div class="container">
+    <div class="section-title">
+      <div class="icon">🗺</div>
+      <h2>环岛路线示意图</h2>
+    </div>
+    <div class="map-container">
+      <svg class="route-map" viewBox="0 0 680 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="海南岛环岛自驾逆时针路线示意图">
+        <title>海南岛环岛自驾路线（逆时针）</title>
+
+        <!-- Background island shape -->
+        <ellipse cx="340" cy="230" rx="270" ry="190" fill="#E1F5EE" stroke="#9FE1CB" stroke-width="1"/>
+
+        <!-- Rough coastal outline (simplified) -->
+        <path d="M 120,170 Q 100,140 110,100 Q 130,70 170,60 Q 220,48 280,52 Q 340,55 390,58 Q 440,60 490,75 Q 540,92 560,130 Q 580,160 575,200 Q 570,240 555,280 Q 535,320 510,355 Q 480,385 440,400 Q 400,415 360,415 Q 320,415 290,408 Q 250,398 215,378 Q 175,355 155,320 Q 130,285 122,250 Q 115,210 120,170Z"
+              fill="#EBF7F2" stroke="#5DCAA5" stroke-width="1.5"/>
+
+        <!-- Central mountains hint -->
+        <path d="M 240,230 Q 280,180 320,200 Q 360,175 400,195 Q 440,215 430,250 Q 390,270 340,265 Q 280,260 240,230Z" fill="#C0DD97" opacity="0.5"/>
+        <text x="340" y="230" text-anchor="middle" font-size="11" fill="#3B6D11" font-family="Noto Sans SC,sans-serif">中部山区</text>
+        <text x="340" y="244" text-anchor="middle" font-size="9" fill="#3B6D11" font-family="Noto Sans SC,sans-serif">五指山</text>
+
+        <!-- ===== ROUTE PATH (counter-clockwise) ===== -->
+        <!-- West line: Haikou → Danzhou → Dongfang → Sanya -->
+        <path d="M 195,108 Q 155,140 145,180 Q 135,220 145,265 Q 158,305 175,335 Q 200,370 235,390"
+              fill="none" stroke="#1D9E75" stroke-width="3" stroke-dasharray="8,4"/>
+        <!-- South: Sanya stays -->
+        <path d="M 235,390 Q 265,408 300,413 Q 340,416 370,412 Q 400,405 420,390"
+              fill="none" stroke="#1D9E75" stroke-width="3" stroke-dasharray="8,4"/>
+        <!-- East line: Sanya → Wanning/Boao → Wenchang → Haikou -->
+        <path d="M 420,390 Q 460,365 490,335 Q 520,305 535,265 Q 548,230 540,190 Q 528,155 500,128 Q 460,95 410,82 Q 370,72 330,70 Q 290,70 255,80 Q 225,90 195,108"
+              fill="none" stroke="#0F6E56" stroke-width="3"/>
+
+        <!-- Direction arrows -->
+        <polygon points="145,220 138,232 152,232" fill="#1D9E75"/>
+        <polygon points="300,415 288,407 296,400" fill="#1D9E75"/>
+        <polygon points="530,200 538,188 524,188" fill="#0F6E56"/>
+
+        <!-- ===== LOCATION MARKERS ===== -->
+        <!-- Haikou (START/END) -->
+        <circle cx="196" cy="108" r="12" fill="#0F6E56" stroke="#fff" stroke-width="2"/>
+        <text x="196" y="112" text-anchor="middle" font-size="11" fill="white" font-weight="bold" font-family="sans-serif">海</text>
+        <rect x="148" y="80" width="52" height="20" rx="6" fill="#0F6E56"/>
+        <text x="174" y="94" text-anchor="middle" font-size="11" fill="white" font-family="Noto Sans SC,sans-serif">海口 D1</text>
+
+        <!-- Danzhou (D2) -->
+        <circle cx="143" cy="195" r="9" fill="#1D9E75" stroke="#fff" stroke-width="2"/>
+        <text x="143" y="199" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif">儋</text>
+        <text x="120" y="192" text-anchor="end" font-size="11" fill="#085041" font-family="Noto Sans SC,sans-serif">儋州 D2</text>
+
+        <!-- Dongfang (D3 route) -->
+        <circle cx="145" cy="275" r="7" fill="#5DCAA5" stroke="#fff" stroke-width="1.5"/>
+        <text x="120" y="272" text-anchor="end" font-size="10" fill="#085041" font-family="Noto Sans SC,sans-serif">东方 D3</text>
+
+        <!-- Sanya (D3-D5) -->
+        <circle cx="248" cy="396" r="12" fill="#D85A30" stroke="#fff" stroke-width="2"/>
+        <text x="248" y="400" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif">亚</text>
+        <rect x="220" y="413" width="56" height="20" rx="6" fill="#D85A30"/>
+        <text x="248" y="427" text-anchor="middle" font-size="11" fill="white" font-family="Noto Sans SC,sans-serif">三亚 D3–5</text>
+
+        <!-- Wuzhizhou Island indicator -->
+        <circle cx="290" cy="430" r="5" fill="#BA7517" stroke="#fff" stroke-width="1.5"/>
+        <text x="295" y="446" text-anchor="start" font-size="10" fill="#633806" font-family="Noto Sans SC,sans-serif">蜈支洲岛</text>
+
+        <!-- Lingshui/Wanning (D6 route) -->
+        <circle cx="490" cy="348" r="7" fill="#5DCAA5" stroke="#fff" stroke-width="1.5"/>
+        <text x="500" y="345" text-anchor="start" font-size="10" fill="#085041" font-family="Noto Sans SC,sans-serif">万宁</text>
+
+        <!-- Boao (D6) -->
+        <circle cx="524" cy="268" r="9" fill="#378ADD" stroke="#fff" stroke-width="2"/>
+        <text x="524" y="272" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif">博</text>
+        <text x="536" y="268" text-anchor="start" font-size="11" fill="#0C447C" font-family="Noto Sans SC,sans-serif">博鳌 D6</text>
+
+        <!-- Wenchang (D7) -->
+        <circle cx="478" cy="110" r="9" fill="#7F77DD" stroke="#fff" stroke-width="2"/>
+        <text x="478" y="114" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif">文</text>
+        <text x="490" y="110" text-anchor="start" font-size="11" fill="#26215C" font-family="Noto Sans SC,sans-serif">文昌 D7</text>
+
+        <!-- Legend -->
+        <rect x="15" y="355" width="130" height="95" rx="8" fill="white" stroke="#D3D1C7" stroke-width="0.5" opacity="0.9"/>
+        <text x="80" y="372" text-anchor="middle" font-size="11" fill="#2C2C2A" font-weight="500" font-family="Noto Sans SC,sans-serif">图例</text>
+        <line x1="24" y1="385" x2="50" y2="385" stroke="#1D9E75" stroke-width="3" stroke-dasharray="6,3"/>
+        <text x="56" y="389" font-size="10" fill="#5F5E5A" font-family="Noto Sans SC,sans-serif">西线（逆时针）</text>
+        <line x1="24" y1="400" x2="50" y2="400" stroke="#0F6E56" stroke-width="3"/>
+        <text x="56" y="404" font-size="10" fill="#5F5E5A" font-family="Noto Sans SC,sans-serif">东线（逆时针）</text>
+        <circle cx="34" cy="418" r="5" fill="#0F6E56"/>
+        <text x="56" y="422" font-size="10" fill="#5F5E5A" font-family="Noto Sans SC,sans-serif">出发/结束</text>
+        <circle cx="34" cy="435" r="5" fill="#D85A30"/>
+        <text x="56" y="439" font-size="10" fill="#5F5E5A" font-family="Noto Sans SC,sans-serif">重点景区</text>
+
+        <!-- Title -->
+        <text x="340" y="30" text-anchor="middle" font-size="15" fill="#085041" font-weight="500" font-family="Noto Sans SC,sans-serif">海南岛环岛自驾 · 逆时针路线</text>
+
+        <!--琼州海峡 -->
+        <text x="196" y="52" text-anchor="middle" font-size="10" fill="#185FA5" font-family="Noto Sans SC,sans-serif">琼州海峡 →</text>
+
+        <!-- 南海 -->
+        <text x="580" y="420" text-anchor="middle" font-size="11" fill="#185FA5" font-family="Noto Sans SC,sans-serif">南海</text>
+
+        <!-- Nandao/Nanshan indicator -->
+        <circle cx="212" cy="388" r="6" fill="#BA7517" stroke="#fff" stroke-width="1.5"/>
+        <text x="198" y="408" text-anchor="middle" font-size="9" fill="#633806" font-family="Noto Sans SC,sans-serif">南山观音</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- RENTAL -->
+<section id="rental" style="background:#fff;">
+  <div class="container">
+    <div class="section-title">
+      <div class="icon">🚗</div>
+      <h2>租车推荐</h2>
+    </div>
+
+    <div class="warning-banner">
+      <span class="wi">💡</span>
+      <p><strong>租车要点：</strong>建议提前1–2个月预订（6月暑期前夕价格会上涨）；海南环岛高速全程<strong>免费</strong>；强烈建议购买全险（约¥50/天），还车时无需担忧小剐蹭；一嗨/神州支持美兰机场直接取还车。</p>
+    </div>
+
+    <div class="car-grid">
+      <div class="car-card recommended">
+        <div class="car-badge badge-rec">⭐ 首推</div>
+        <div class="car-name">紧凑型 SUV（如比亚迪元 PLUS / 宋 Plus）</div>
+        <div class="car-price">¥180–250 <span>/ 天，约 ¥1,200–1,600 / 6天</span></div>
+        <ul class="car-features">
+          <li>空间宽裕，适合行李较多</li>
+          <li>新能源车省油费（海南充电方便）</li>
+          <li>底盘较高，应对部分景区小路</li>
+          <li>推荐平台：一嗨租车 / 神州租车</li>
+          <li>购买全险：+¥50/天</li>
+        </ul>
+      </div>
+      <div class="car-card">
+        <div class="car-badge badge-eco">💰 经济之选</div>
+        <div class="car-name">紧凑型轿车（如比亚迪秦 / 大众朗逸）</div>
+        <div class="car-price">¥130–180 <span>/ 天，约 ¥800–1,100 / 6天</span></div>
+        <ul class="car-features">
+          <li>省钱之选，城市道路舒适</li>
+          <li>油耗/电耗低，运营成本低</li>
+          <li>适合1–2人出行</li>
+          <li>推荐平台：一嗨租车（性价比更高）</li>
+          <li>购买全险：+¥50/天</li>
+        </ul>
+      </div>
+      <div class="car-card">
+        <div class="car-badge badge-prem">✨ 品质之选</div>
+        <div class="car-name">中型 SUV（如岚图 FREE / 问界）</div>
+        <div class="car-price">¥280–380 <span>/ 天，约 ¥1,700–2,300 / 6天</span></div>
+        <ul class="car-features">
+          <li>长途驾驶舒适，减少疲劳</li>
+          <li>车机系统好，导航娱乐齐全</li>
+          <li>适合3–4人出行</li>
+          <li>推荐平台：神州租车</li>
+          <li>购买全险：+¥50/天</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem; background: var(--teal-50); border-radius:12px; padding:1rem 1.2rem;">
+      <p style="font-size:14px; color: var(--teal-800); font-weight:500; margin-bottom:8px;">🚗 取还车建议</p>
+      <p style="font-size:13px; color: var(--teal-600); line-height:1.8;">
+        取车地点：海口美兰国际机场（T1或T2均有网点）<br>
+        还车地点：同上（海口美兰机场），无异地还车费<br>
+        取车时间：6月21日（周日）上午，飞机落地后约1小时<br>
+        还车时间：6月27日（周六）早晨（建议还车后乘出租/网约车去机场）<br>
+        实际用车天数：6天（D2–D7）
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLIES -->
+<section id="supplies">
+  <div class="container">
+    <div class="section-title">
+      <div class="icon">🎒</div>
+      <h2>物资清单</h2>
+    </div>
+    <div class="supply-grid">
+      <div class="supply-card">
+        <h3><div class="supply-icon" style="background:#FAEEDA">☀️</div>防晒必备</h3>
+        <ul class="supply-list">
+          <li>高倍防晒霜（SPF50+ PA+++）× 2支</li>
+          <li>防晒喷雾（补涂用）</li>
+          <li>遮阳帽（大帽檐为佳）</li>
+          <li>太阳镜（UV400 防护）</li>
+          <li>防晒口罩 / 冰袖</li>
+          <li>晒后修复乳 / 芦荟胶</li>
+        </ul>
+      </div>
+      <div class="supply-card">
+        <h3><div class="supply-icon" style="background:#E1F5EE">🏊</div>海水活动</h3>
+        <ul class="supply-list">
+          <li>泳衣 / 泳裤 × 2套</li>
+          <li>游泳眼镜 + 耳塞</li>
+          <li>浮潜面镜（自备更合适）</li>
+          <li>沙滩拖鞋 / 防滑水鞋</li>
+          <li>速干浴巾 × 2</li>
+          <li>防水手机袋</li>
+        </ul>
+      </div>
+      <div class="supply-card">
+        <h3><div class="supply-icon" style="background:#E6F1FB">💊</div>医药应急</h3>
+        <ul class="supply-list">
+          <li>藿香正气水（中暑急救）</li>
+          <li>驱蚊喷雾 / 驱蚊贴</li>
+          <li>止泻药（吃海鲜防腹泻）</li>
+          <li>晕车药（山路备用）</li>
+          <li>创可贴 / 消毒棉球</li>
+          <li>退烧药 + 感冒药</li>
+        </ul>
+      </div>
+      <div class="supply-card">
+        <h3><div class="supply-icon" style="background:#EEEDFE">🚗</div>自驾必备</h3>
+        <ul class="supply-list">
+          <li>驾驶证 + 身份证（必须）</li>
+          <li>手机车载支架</li>
+          <li>车载充电器（多USB口）</li>
+          <li>备用充电宝（10000mAh+）</li>
+          <li>地图App（高德地图下载离线）</li>
+          <li>纸巾 + 湿巾</li>
+        </ul>
+      </div>
+      <div class="supply-card">
+        <h3><div class="supply-icon" style="background:#FAECE7">👗</div>服装建议</h3>
+        <ul class="supply-list">
+          <li>短袖T恤 × 5–6件</li>
+          <li>短裤 × 3–4条</li>
+          <li>轻薄长袖 × 1–2件（晚上空调用）</li>
+          <li>运动鞋（走景区）</li>
+          <li>凉鞋或拖鞋（日常休闲）</li>
+          <li>雨伞 / 便携雨衣（雨季备用）</li>
+        </ul>
+      </div>
+      <div class="supply-card">
+        <h3><div class="supply-icon" style="background:#EAF3DE">📱</div>数码装备</h3>
+        <ul class="supply-list">
+          <li>手机（地图/拍照/导航）</li>
+          <li>相机 / GoPro（海岛防水）</li>
+          <li>多口充电头</li>
+          <li>防水相机袋</li>
+          <li>离岛免税App（提前下载）</li>
+          <li>租车App（一嗨/神州）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips" style="background:#fff;">
+  <div class="container">
+    <div class="section-title">
+      <div class="icon">💡</div>
+      <h2>实用贴士</h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon-wrap" style="background:#E1F5EE">🌦️</div>
+        <div>
+          <h4>6月气候提醒</h4>
+          <p>6月为海南雨季开始，气温32–35°C，紫外线极强。午间12–15时避免暴晒，早晚活动最舒适。台风季开始（7–9月高峰），出发前密切关注天气预报。</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon-wrap" style="background:#FAEEDA">🛣️</div>
+        <div>
+          <h4>道路与驾驶</h4>
+          <p>海南环岛高速全程免费，路况极佳。每天行驶150–200公里最舒适，避免疲劳驾驶。部分景区内道路较窄，注意会车礼让。海南驾驶习惯较慢，保持耐心。</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon-wrap" style="background:#FAECE7">🦟</div>
+        <div>
+          <h4>防蚊防虫</h4>
+          <p>6月湿热，蚊虫繁盛，尤其热带雨林和山区。驱蚊液全程必备，傍晚在户外时穿长袖长裤。住宿选择确认有纱窗或蚊帐。</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon-wrap" style="background:#E6F1FB">🍽️</div>
+        <div>
+          <h4>饮食指南</h4>
+          <p>文昌鸡、海南粉、椰子鸡、东方烤乳猪各有特色。海鲜要谨慎选择食材新鲜的馆子，避免吃有异味的食物。椰汁、清补凉消暑解渴是本地人最爱。</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon-wrap" style="background:#EAF3DE">🛍️</div>
+        <div>
+          <h4>离岛免税购物</h4>
+          <p>每人每年10万元免税额度，化妆品、奢侈品、电子产品最划算。在"离岛免税"App下单，海口机场须提前24小时下单取货，取货时排队较长请早到。</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon-wrap" style="background:#EEEDFE">📋</div>
+        <div>
+          <h4>提前预订建议</h4>
+          <p>机票：出发前1–2个月购买最优惠；租车：提前2个月预订；蜈支洲岛：提前1–2周预订船票；三亚酒店：旺季提前3–4周预订，价格差异很大。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>海南岛环岛自驾游攻略 2026</strong> · 杭州 → 海口 → 逆时针环岛 → 海口 → 杭州</p>
+  <p style="margin-top:6px">出发日期：2026年6月20日 &nbsp;|&nbsp; 全程约1,100公里 &nbsp;|&nbsp; 预算约￥20,000</p>
+  <p style="margin-top:6px; opacity:0.5; font-size:12px">行程和价格仅供参考，具体以出行时实际情况为准，请关注最新天气和景区公告</p>
+</footer>
+
+<script>
+function toggleDay(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.day-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+
+const sections = document.querySelectorAll('section[id], div[id="route-map"]');
+const navLinks = document.querySelectorAll('.nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+toggleDay(document.querySelector('.day-card .day-header'));
+</script>
+</body>
+</html>
